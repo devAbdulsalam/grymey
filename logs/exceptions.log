@@ -1,0 +1,150 @@
+2025-08-03T18:49:53.275Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:52:37.493Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:53:25.215Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:55:11.144Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:55:30.759Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:55:51.832Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:03.002Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:12.432Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:19.775Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:32.514Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:42.067Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:56:56.022Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:57:05.028Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:57:07.581Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:57:19.208Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:57:56.618Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T18:58:48.107Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T19:00:15.333Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T19:01:01.707Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T19:08:20.128Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T19:09:38.039Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03T19:09:41.834Z error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03 20:30:38 error: 	uncaughtException: moneyJarRoutes is not defined
+ReferenceError: moneyJarRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:101:25
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03 20:31:47 error: 	uncaughtException: escrowRoutes is not defined
+ReferenceError: escrowRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:103:27
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-03 20:32:35 error: 	uncaughtException: escrowRoutes is not defined
+ReferenceError: escrowRoutes is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:102:27
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)

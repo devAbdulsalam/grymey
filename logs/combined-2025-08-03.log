@@ -1,0 +1,94 @@
+2025-08-03 20:51:23 error: 	unhandledRejection: logger is not defined
+ReferenceError: logger is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:141:23
+2025-08-03 20:52:59 error: 	MongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-08-03 21:16:54 error: 	MongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-08-03 21:17:59 error: 	MongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-08-03 21:19:04 error: 	MongoDB connection error: Could not connect to any servers in your MongoDB Atlas cluster. One common reason is that you're trying to access the database from an IP that isn't whitelisted. Make sure your current IP address is on your Atlas cluster's IP whitelist: https://www.mongodb.com/docs/atlas/security-whitelist/
+2025-08-03 21:22:06 info: 	Server running on port 9000
+2025-08-03 21:22:06 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:22:06 info: 	MongoDB connected successfully
+2025-08-03 21:22:18 info: 	Server running on port 9000
+2025-08-03 21:22:18 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:22:18 info: 	MongoDB connected successfully
+2025-08-03 21:23:32 info: 	Server running on port 9000
+2025-08-03 21:23:32 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:23:32 info: 	MongoDB connected successfully
+2025-08-03 21:23:59 info: 	Server running on port 9000
+2025-08-03 21:23:59 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:23:59 info: 	MongoDB connected successfully
+2025-08-03 21:29:55 info: 	Server running on port 9000
+2025-08-03 21:29:55 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:29:55 info: 	MongoDB connected successfully
+2025-08-03 21:30:44 info: 	Server running on port 9000
+2025-08-03 21:30:44 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:30:44 info: 	MongoDB connected successfully
+2025-08-03 21:31:23 info: 	Server running on port 9000
+2025-08-03 21:31:23 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:31:23 info: 	MongoDB connected successfully
+2025-08-03 21:38:29 info: 	Server running on port 9000
+2025-08-03 21:38:29 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:38:29 info: 	MongoDB connected successfully
+2025-08-03 21:40:39 info: 	Server running on port 9000
+2025-08-03 21:40:39 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:40:39 info: 	MongoDB connected successfully
+2025-08-03 21:40:52 info: 	Server running on port 9000
+2025-08-03 21:40:52 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:40:52 info: 	MongoDB connected successfully
+2025-08-03 21:41:41 info: 	Server running on port 9000
+2025-08-03 21:41:41 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:41:41 info: 	MongoDB connected successfully
+2025-08-03 21:44:14 info: 	Server running on port 9000
+2025-08-03 21:44:14 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:44:14 info: 	MongoDB connected successfully
+2025-08-03 21:44:33 info: 	Server running on port 9000
+2025-08-03 21:44:33 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:44:33 info: 	MongoDB connected successfully
+2025-08-03 21:45:00 info: 	Server running on port 9000
+2025-08-03 21:45:00 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:45:00 info: 	MongoDB connected successfully
+2025-08-03 21:48:13 info: 	Server running on port 9000
+2025-08-03 21:48:13 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:48:13 info: 	MongoDB connected successfully
+2025-08-03 21:48:27 info: 	Server running on port 9000
+2025-08-03 21:48:27 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:48:27 info: 	MongoDB connected successfully
+2025-08-03 21:48:55 info: 	Server running on port 9000
+2025-08-03 21:48:55 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:48:55 info: 	MongoDB connected successfully
+2025-08-03 21:49:30 info: 	Server running on port 9000
+2025-08-03 21:49:30 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:49:30 info: 	MongoDB connected successfully
+2025-08-03 21:49:37 info: 	Server running on port 9000
+2025-08-03 21:49:37 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:49:37 info: 	MongoDB connected successfully
+2025-08-03 21:49:43 info: 	Server running on port 9000
+2025-08-03 21:49:43 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 21:49:43 info: 	MongoDB connected successfully
+2025-08-03 22:00:19 info: 	Server running on port 9000
+2025-08-03 22:00:19 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:00:19 info: 	MongoDB connected successfully
+2025-08-03 22:01:30 info: 	Server running on port 9000
+2025-08-03 22:01:30 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:01:30 info: 	MongoDB connected successfully
+2025-08-03 22:01:39 info: 	Server running on port 9000
+2025-08-03 22:01:39 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:01:39 info: 	MongoDB connected successfully
+2025-08-03 22:02:13 info: 	Server running on port 9000
+2025-08-03 22:02:13 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:02:13 info: 	MongoDB connected successfully
+2025-08-03 22:02:34 info: 	Server running on port 9000
+2025-08-03 22:02:34 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:02:34 info: 	MongoDB connected successfully
+2025-08-03 22:04:20 info: 	Server running on port 9000
+2025-08-03 22:04:20 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:04:20 info: 	MongoDB connected successfully
+2025-08-03 22:04:31 info: 	Server running on port 9000
+2025-08-03 22:04:31 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:04:31 info: 	MongoDB connected successfully
+2025-08-03 22:05:12 info: 	Server running on port 9000
+2025-08-03 22:05:12 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:05:12 info: 	MongoDB connected successfully
+2025-08-03 22:07:45 info: 	Server running on port 9000
+2025-08-03 22:07:45 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-03 22:07:45 info: 	MongoDB connected successfully

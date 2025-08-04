@@ -1,0 +1,3 @@
+2025-08-03 20:51:23 error: 	unhandledRejection: logger is not defined
+ReferenceError: logger is not defined
+    at file:///Users/macbookpro/Desktop/projects/grymey/index.js:141:23

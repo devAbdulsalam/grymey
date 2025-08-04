@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 30
+    },
+    "auditLog": "/Users/macbookpro/Desktop/projects/grymey/logs/.f55ae016a728af6a7ff1b5093b68a41ec64c50cd-audit.json",
+    "files": [
+        {
+            "date": 1754246993096,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-03.log",
+            "hash": "40b19729ba29c409114b2f40f46effeb09b63fab6d8910506a2903fefd9d4b53"
+        }
+    ],
+    "hashType": "sha256"
+}
