@@ -14,5 +14,6 @@ router.post('/payment-link', receiveMoneyController.createPaymentLink);
 router.post('/split-link', receiveMoneyController.createSplitLink);
 router.post('/crowdfunding', receiveMoneyController.createCrowdfunding);
 router.get('/links', receiveMoneyController.getActiveLinks);
+router.get('/links/:id', receiveMoneyController.getPaymentLink);
 
 export default router;

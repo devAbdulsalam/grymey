@@ -10,7 +10,7 @@ import logger from '../utils/logger.js';
 class ReceiveMoneyController {
 	async generateInvoice(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const invoiceData = validateGenerateInvoice(req.body);
 
 			const invoice = await receiveMoneyService.generateInvoice(
@@ -38,7 +38,7 @@ class ReceiveMoneyController {
 
 	async createPaymentLink(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const paymentLinkData = validateCreatePaymentLink(req.body);
 
 			const paymentLink = await receiveMoneyService.createPaymentLink(
@@ -65,8 +65,16 @@ class ReceiveMoneyController {
 
 	async createSplitLink(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const splitLinkData = validateCreateSplitLink(req.body);
+			// const totalAmount = splitLinkData.totalAmount;
+			// const totalAmount = splitLinkData.recipients.reduce(
+			// 	(sum, recipient) => sum + recipient.amount,
+			// 	0
+			// )
+
+			// consider the total amount, and sharing amount/percentage or both
+			// consider default value for each recipient
 
 			const splitLink = await receiveMoneyService.createSplitLink(
 				userId,
@@ -93,7 +101,7 @@ class ReceiveMoneyController {
 
 	async createCrowdfunding(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const crowdfundingData = validateCreateCrowdfunding(req.body);
 
 			const crowdfunding = await receiveMoneyService.createCrowdfunding(
@@ -121,13 +129,32 @@ class ReceiveMoneyController {
 
 	async getActiveLinks(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 
 			const activeLinks = await receiveMoneyService.getActiveLinks(userId);
 
 			res.json({
 				success: true,
 				activeLinks,
+			});
+		} catch (error) {
+			logger.error(`Get active links error: ${error.message}`);
+			next(error);
+		}
+	}
+	async getPaymentLink(req, res, next) {
+		try {
+			const userId = req.user._id;
+			const paymentId = req.params.id;
+
+			const paymentLinks = await receiveMoneyService.getPaymentLink(
+				paymentId,
+				userId
+			);
+
+			res.json({
+				success: true,
+				paymentLinks,
 			});
 		} catch (error) {
 			logger.error(`Get active links error: ${error.message}`);

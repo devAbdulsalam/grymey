@@ -10,7 +10,7 @@ import logger from '../utils/logger.js';
 class GrymeyCircleController {
 	async createCircle(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const circleData = validateCreateCircle(req.body);
 
 			const circle = await grymeyCircleService.createCircle(userId, circleData);
@@ -35,7 +35,7 @@ class GrymeyCircleController {
 
 	async getUserCircles(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 
 			const circles = await grymeyCircleService.getUserCircles(userId);
 
@@ -87,7 +87,7 @@ class GrymeyCircleController {
 
 	async contributeToCircle(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id: circleId } = req.params;
 			const { amount } = validateContributeToCircle(req.body);
 
@@ -116,7 +116,7 @@ class GrymeyCircleController {
 
 	async withdrawFromCircle(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id: circleId } = req.params;
 			const withdrawalData = validateWithdrawFromCircle(req.body);
 

@@ -214,18 +214,31 @@ class SplitPaymentService {
 				...(status && { status }),
 			};
 
-			const options = {
-				page,
-				limit,
-				sort: { createdAt: -1 },
-				populate: [
-					{ path: 'creatorId', select: 'name email' },
-					{ path: 'payerId', select: 'name email' },
-				],
-			};
+			const skip = (page - 1) * limit;
 
-			const result = await SplitPayment.paginate(query, options);
-			return result;
+			const [payments, total] = await Promise.all([
+				SplitPayment.find(query)
+					.sort({ createdAt: -1 })
+					.skip(skip)
+					.limit(limit)
+					.populate('creatorId', 'name email')
+					.populate('payerId', 'name email')
+					.populate('recipients.userId', 'name email')
+					.lean(),
+				SplitPayment.countDocuments(query),
+			]);
+
+			return {
+				data: payments,
+				pagination: {
+					total,
+					limit,
+					page,
+					pages: Math.ceil(total / limit),
+					hasNext: page * limit < total,
+					hasPrev: page > 1,
+				},
+			};
 		} catch (error) {
 			logger.error(
 				`Error getting split payments for user ${userId}: ${error.message}`
@@ -233,6 +246,44 @@ class SplitPaymentService {
 			throw error;
 		}
 	}
+	async getSplitPayments({ page = 1, limit = 10, status }) {
+		try {
+			const query = {
+				...(status && { status }),
+			};
+	
+			
+			const skip = (page - 1) * limit;
+
+			const [payments, total] = await Promise.all([
+				SplitPayment.find(query)
+					.sort({ createdAt: -1 })
+					.skip(skip)
+					.limit(limit)
+					.populate('creatorId', 'name email')
+					.populate('payerId', 'name email')
+					.populate('recipients.userId', 'name email')
+					.lean(),
+				SplitPayment.countDocuments(query),
+			]);
+
+			return {
+				data: payments,
+				pagination: {
+					total,
+					limit,
+					page,
+					pages: Math.ceil(total / limit),
+					hasNext: page * limit < total,
+					hasPrev: page > 1,
+				},
+			};
+		} catch (error) {
+			logger.error(`Error getting split payments: ${error.message}`);
+			throw new Error('Failed to retrieve split payments');
+		}
+	}
+
 
 	async acquireLock(resourceId) {
 		const MAX_RETRIES = 5;

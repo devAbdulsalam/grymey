@@ -9,6 +9,16 @@
             "date": 1754246993093,
             "name": "/Users/macbookpro/Desktop/projects/grymey/logs/error-2025-08-03.log",
             "hash": "47f0571ba1b22f830455659f82241102f9bf1878885420438cf7661ad25c1381"
+        },
+        {
+            "date": 1755181582657,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/error-2025-08-14.log",
+            "hash": "d5cd6534edd7e4ad2e39dedfa29cde8e1ea84b700423f4c0648b541d65c6319b"
+        },
+        {
+            "date": 1755249717995,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/error-2025-08-15.log",
+            "hash": "5ed30ef358aea25d5750dbf92f6d41d0d28d471d874ee8ea666aa5ccb9d5ad86"
         }
     ],
     "hashType": "sha256"

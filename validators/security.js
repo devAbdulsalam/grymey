@@ -19,13 +19,43 @@ const verifyTransferSchema = Joi.object({
 });
 
 export function validateGhostTransfer(data) {
-	return ghostTransferSchema.validate(data, { abortEarly: false });
+	const { value, error } = ghostTransferSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateReportFraud(data) {
-	return reportFraudSchema.validate(data, { abortEarly: false });
+	const { value, error } = reportFraudSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateVerifyTransfer(data) {
-	return verifyTransferSchema.validate(data, { abortEarly: false });
+	const { value, error } = verifyTransferSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

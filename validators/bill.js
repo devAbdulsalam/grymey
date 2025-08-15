@@ -16,9 +16,29 @@ const getPaymentHistorySchema = Joi.object({
 });
 
 export function validatePayBill(data) {
-	return payBillSchema.validate(data, { abortEarly: false });
+	const { value, error } = payBillSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateGetPaymentHistory(data) {
-	return getPaymentHistorySchema.validate(data, { abortEarly: false });
+	const { value, error } = getPaymentHistorySchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

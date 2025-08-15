@@ -214,27 +214,76 @@ class EscrowService {
 	async getUserEscrows(userId, { page = 1, limit = 10, status }) {
 		try {
 			const query = {
-				$or: [{ senderId: userId }, { receiverId: userId }],
+				$or: [{ creatorId: userId }, { payerId: userId }],
 				...(status && { status }),
 			};
 
-			const options = {
-				page,
-				limit,
-				sort: { createdAt: -1 },
-				populate: [
-					{ path: 'senderId', select: 'name email' },
-					{ path: 'receiverId', select: 'name email' },
-				],
-			};
+			const skip = (page - 1) * limit;
 
-			const result = await Escrow.paginate(query, options);
-			return result;
+			const [payments, total] = await Promise.all([
+				Escrow.find(query)
+					.sort({ createdAt: -1 })
+					.skip(skip)
+					.limit(limit)
+					.populate('creatorId', 'name email')
+					.populate('payerId', 'name email')
+					.populate('recipients.userId', 'name email')
+					.lean(),
+				Escrow.countDocuments(query),
+			]);
+
+			return {
+				data: payments,
+				pagination: {
+					total,
+					limit,
+					page,
+					pages: Math.ceil(total / limit),
+					hasNext: page * limit < total,
+					hasPrev: page > 1,
+				},
+			};
 		} catch (error) {
 			logger.error(
-				`Error getting escrows for user ${userId}: ${error.message}`
+				`Error getting split payments for user ${userId}: ${error.message}`
 			);
 			throw error;
+		}
+	}
+	async getEscrows({ page = 1, limit = 10, status }) {
+		try {
+			const query = {
+				...(status && { status }),
+			};
+
+			const skip = (page - 1) * limit;
+
+			const [payments, total] = await Promise.all([
+				Escrow.find(query)
+					.sort({ createdAt: -1 })
+					.skip(skip)
+					.limit(limit)
+					.populate('creatorId', 'name email')
+					.populate('payerId', 'name email')
+					.populate('recipients.userId', 'name email')
+					.lean(),
+				Escrow.countDocuments(query),
+			]);
+
+			return {
+				data: payments,
+				pagination: {
+					total,
+					limit,
+					page,
+					pages: Math.ceil(total / limit),
+					hasNext: page * limit < total,
+					hasPrev: page > 1,
+				},
+			};
+		} catch (error) {
+			logger.error(`Error getting split payments: ${error.message}`);
+			throw new Error('Failed to retrieve split payments');
 		}
 	}
 

@@ -37,13 +37,43 @@ const withdrawFromMoneyJarSchema = Joi.object({
 });
 
 export function validateCreateMoneyJar(data) {
-	return createMoneyJarSchema.validate(data, { abortEarly: false });
+	const { value, error } = createMoneyJarSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateFundMoneyJar(data) {
-	return fundMoneyJarSchema.validate(data, { abortEarly: false });
+	const { value, error } = fundMoneyJarSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateWithdrawFromMoneyJar(data) {
-	return withdrawFromMoneyJarSchema.validate(data, { abortEarly: false });
+	const { value, error } = withdrawFromMoneyJarSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

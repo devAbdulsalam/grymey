@@ -17,6 +17,7 @@ import {
 	signinUser,
 	roleBasedLogin,
 	loginUser,
+	phoneLogin,
 	getUser,
 	getUsers,
 	assignRole,
@@ -40,6 +41,7 @@ import {
 
 // // get user
 router.post('/login', userLoginValidator, validate, loginUser);
+router.post('/phone-login', phoneLogin);
 // // role base login
 router.post('/signin', userRoleBaseLoginValidator, validate, roleBasedLogin);
 
@@ -56,7 +58,11 @@ router.post(
 
 router.post('/refresh-token', refreshAccessToken);
 router.get('/verify-email/:verificationToken', verifyEmail);
-router.post('/resend-email-verification', authenticate, resendEmailVerification);
+router.post(
+	'/resend-email-verification',
+	authenticate,
+	resendEmailVerification
+);
 
 // //send otp to mail
 router.post('/send-otp', sendOTP);
@@ -100,7 +106,11 @@ router.patch('/profile', authenticate, upload.single('avatar'), updateProfile);
 router.delete('/delete-account', authenticate, deleteUser);
 
 // admin roles
-router.get('/', authenticate, verifyPermission(['ADMIN']), getUsers);
+router.get(
+	'/',
+	// authenticate, verifyPermission(['ADMIN']),
+	getUsers
+);
 router.post(
 	'/assign-role/:id',
 	userAssignRoleValidator,

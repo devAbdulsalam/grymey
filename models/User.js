@@ -41,10 +41,15 @@ const UserSchema = new mongoose.Schema(
 				message: 'Invalid email format',
 			},
 		},
-		passwordHash: String,
+		password: String,
+		transactionPin: String,
+		isTransactionPin: String,
 		ghostPasswordHash: String,
 		ghostAuthCode: String,
-		isVerified: Boolean,
+		isVerified: {
+			type: Boolean,
+			default: false,
+		},
 		kycStatus: String, // 'pending', 'verified', 'rejected'
 		kycDocuments: [
 			{
@@ -54,8 +59,14 @@ const UserSchema = new mongoose.Schema(
 			},
 		],
 		preferences: {
-			notification: Boolean,
-			securityAlerts: Boolean,
+			notification: {
+				type: Boolean,
+				default: false,
+			},
+			securityAlerts: {
+				type: Boolean,
+				default: false,
+			},
 		},
 		createdAt: Date,
 		lastLogin: Date,

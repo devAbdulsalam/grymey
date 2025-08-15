@@ -54,6 +54,20 @@ class MoneyJarService {
 			throw error;
 		}
 	}
+	async getMoneyJar(jarId) {
+		try {
+			const moneyJar = await MoneyJar.findById(jarId)
+				.populate('creatorId', 'name email')
+				.populate('payerId', 'name email');
+
+			return moneyJar;
+		} catch (error) {
+			logger.error(
+				`Error getting money jar with id ${jarId}: ${error.message}`
+			);
+			throw error;
+		}
+	}
 
 	async fundMoneyJar(jarId, userId, amount) {
 		const session = await mongoose.startSession();
@@ -81,22 +95,7 @@ class MoneyJarService {
 				throw new Error('Cannot fund a locked money jar');
 			}
 
-			// Update wallet
-			wallet.balance -= amount;
-			wallet.ledger.push({
-				transactionId: null, // Will be updated after transaction creation
-				amount: -amount,
-				balanceBefore: wallet.balance + amount,
-				balanceAfter: wallet.balance,
-				type: 'debit',
-			});
-			await wallet.save({ session });
-
-			// Update money jar
-			moneyJar.currentAmount += amount;
-			await moneyJar.save({ session });
-
-			// Create transaction record
+			// Create transaction record first
 			const transaction = new Transaction({
 				senderId: userId,
 				receiverId: userId, // Self-transfer
@@ -113,9 +112,20 @@ class MoneyJarService {
 
 			await transaction.save({ session });
 
-			// Update wallet ledger with transaction ID
-			wallet.ledger[wallet.ledger.length - 1].transactionId = transaction._id;
+			// Update wallet
+			wallet.balance -= amount;
+			wallet.ledger.push({
+				transactionId: transaction._id, // Use the saved transaction's ID
+				amount: -amount,
+				balanceBefore: wallet.balance + amount,
+				balanceAfter: wallet.balance,
+				type: 'debit',
+			});
 			await wallet.save({ session });
+
+			// Update money jar
+			moneyJar.currentAmount += amount;
+			await moneyJar.save({ session });
 
 			await session.commitTransaction();
 
@@ -149,10 +159,10 @@ class MoneyJarService {
 			}
 
 			// Check if jar is locked and user is Pro
-			const user = await User.findById(userId).session(session);
-			if (moneyJar.isLocked && !user?.isPro) {
-				throw new Error('Cannot withdraw from locked jar without Pro tier');
-			}
+			// const user = await User.findById(userId).session(session);
+			// if (moneyJar.isLocked && !user?.isPro) {
+			// 	throw new Error('Cannot withdraw from locked jar without Pro tier');
+			// }
 
 			// Calculate penalty if applicable
 			let penaltyAmount = 0;
@@ -172,14 +182,6 @@ class MoneyJarService {
 			// Update wallet (amount after penalty)
 			const amountAfterPenalty = amount - penaltyAmount;
 			wallet.balance += amountAfterPenalty;
-			wallet.ledger.push({
-				transactionId: null, // Will be updated after transaction creation
-				amount: amountAfterPenalty,
-				balanceBefore: wallet.balance - amountAfterPenalty,
-				balanceAfter: wallet.balance,
-				type: 'credit',
-			});
-			await wallet.save({ session });
 
 			// Create transaction record
 			const transaction = new Transaction({
@@ -202,8 +204,17 @@ class MoneyJarService {
 			await transaction.save({ session });
 
 			// Update wallet ledger with transaction ID
-			wallet.ledger[wallet.ledger.length - 1].transactionId = transaction._id;
+			wallet.ledger.push({
+				transactionId: transaction._id, // Will be updated after transaction creation
+				amount: amountAfterPenalty,
+				balanceBefore: wallet.balance - amountAfterPenalty,
+				balanceAfter: wallet.balance,
+				type: 'credit',
+			});
 			await wallet.save({ session });
+
+			// wallet.ledger[wallet.ledger.length - 1].transactionId = transaction._id;
+			// await wallet.save({ session });
 
 			// If there was a penalty, create a separate transaction record
 			if (penaltyAmount > 0) {

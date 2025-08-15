@@ -13,13 +13,43 @@ const fundCardSchema = Joi.object({
 const freezeCardSchema = Joi.object({}).unknown(false); // No body expected
 
 export function validateRequestNewCard(data) {
-	return requestNewCardSchema.validate(data, { abortEarly: false });
+	const { value, error } = requestNewCardSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateFundCard(data) {
-	return fundCardSchema.validate(data, { abortEarly: false });
+	const { value, error } = fundCardSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateFreezeCard(data) {
-	return freezeCardSchema.validate(data, { abortEarly: false });
+	const { value, error } = freezeCardSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

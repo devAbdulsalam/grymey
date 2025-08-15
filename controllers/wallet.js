@@ -4,19 +4,21 @@ import {
 	validateFundWallet,
 	validateTransferFunds,
 	validateTransactionSearch,
+	validateSendFunds,
 } from '../validators/wallet.js';
 import logger from '../utils/logger.js';
 
 class WalletController {
 	async getWallet(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const isGhost = req.isGhost || false;
 
 			const wallet = await walletService.getWallet(userId, isGhost);
 
 			// Sanitize response - don't send full ledger unless needed
 			const response = {
+				_id: wallet._id,
 				balance: wallet.balance,
 				currency: wallet.currency,
 				lastTransactions: wallet.ledger.slice(0, 5),
@@ -31,7 +33,7 @@ class WalletController {
 
 	async fundWallet(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { amount } = validateFundWallet(req.body);
 			const isGhost = req.isGhost || false;
 
@@ -59,9 +61,71 @@ class WalletController {
 
 	async transferFunds(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { receiverId, amount } = validateTransferFunds(req.body);
 			const isGhost = req.isGhost || false;
+
+			const { transaction, senderWallet } = await walletService.transferFunds(
+				userId,
+				receiverId,
+				amount,
+				isGhost
+			);
+
+			res.json({
+				success: true,
+				newBalance: senderWallet.balance,
+				transaction: {
+					id: transaction._id,
+					reference: transaction.reference,
+					amount: transaction.amount,
+					status: transaction.status,
+					receiverId: transaction.receiverId,
+				},
+			});
+		} catch (error) {
+			logger.error(`Transfer funds error: ${error.message}`);
+			next(error);
+		}
+	}
+	async sendFunds(req, res, next) {
+		try {
+			const userId = req.user._id;
+			const { phone, amount } = validateSendFunds(req.body);
+			const isGhost = req.isGhost || false;
+
+			const receiverId = await walletService.getWalletByPhone(phone);
+
+			const { transaction, senderWallet } = await walletService.transferFunds(
+				userId,
+				receiverId,
+				amount,
+				isGhost
+			);
+
+			res.json({
+				success: true,
+				newBalance: senderWallet.balance,
+				transaction: {
+					id: transaction._id,
+					reference: transaction.reference,
+					amount: transaction.amount,
+					status: transaction.status,
+					receiverId: transaction.receiverId,
+				},
+			});
+		} catch (error) {
+			logger.error(`Transfer funds error: ${error.message}`);
+			next(error);
+		}
+	}
+	async getWalletDetails(req, res, next) {
+		try {
+			const userId = req.user._id;
+			const { phone, amount } = validateSendFunds(req.body);
+			const isGhost = req.isGhost || false;
+
+			const receiverId = await walletService.getWalletByPhone(phone);
 
 			const { transaction, senderWallet } = await walletService.transferFunds(
 				userId,
@@ -89,7 +153,7 @@ class WalletController {
 
 	async getTransactions(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { page, limit, type, status, startDate, endDate } = req.query;
 
 			const transactions = await transactionService.getTransactions(userId, {
@@ -110,7 +174,7 @@ class WalletController {
 
 	async searchTransactions(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const searchQuery = validateTransactionSearch(req.body);
 
 			const transactions = await transactionService.searchTransactions(

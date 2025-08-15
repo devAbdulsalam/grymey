@@ -7,6 +7,7 @@ const router = express.Router();
 router.use(authMiddleware.authenticate);
 
 // Escrow endpoints
+router.get('/', escrowController.getEscrows);
 router.post('/', escrowController.createEscrow);
 router.post('/:id/release', escrowController.releaseEscrow);
 router.post('/:id/dispute', escrowController.raiseDispute);

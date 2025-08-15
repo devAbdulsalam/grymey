@@ -1,13 +1,31 @@
 import Wallet from '../models/Wallet.js';
+import User from '../models/User.js';
 import Transaction from '../models/Transaction.js';
 import { generateReference } from '../utils/generator.js';
 import logger from '../utils/logger.js';
+import mongoose from 'mongoose';
 
 class WalletService {
 	constructor() {
 		this.locks = new Map(); // In-memory locks to prevent race conditions
 	}
 
+	async getWalletByPhone(phone) {
+		try {
+			const user = await User.findOne({ phone });
+			if (!user) {
+				throw new Error('User not found');
+			}
+			const wallet = await Wallet.findOne({ userId: user._id });
+			if (!wallet) {
+				throw new Error('Wallet not found');
+			}
+			return wallet;
+		} catch (error) {
+			logger.error(`Error getting wallet for user with phone ${phone}: ${error.message}`);
+			throw error;
+		}
+	}
 	async getWallet(userId, isGhost = false) {
 		try {
 			const wallet = await Wallet.findOne({ userId, isGhost });
@@ -29,6 +47,11 @@ class WalletService {
 			// Acquire lock for this user's wallet
 			await this.acquireLock(userId);
 
+			const isWallet = await Wallet.findOne({ userId, isGhost }).session(
+				session
+			);
+			// console.log('amount', amount);
+			// console.log(isWallet.balance);
 			const wallet = await Wallet.findOneAndUpdate(
 				{ userId, isGhost },
 				{
@@ -37,8 +60,8 @@ class WalletService {
 						ledger: {
 							transactionId: null, // Will be updated after transaction creation
 							amount,
-							balanceBefore: wallet.balance,
-							balanceAfter: wallet.balance + amount,
+							balanceBefore: isWallet.balance,
+							balanceAfter: isWallet.balance + amount,
 							type: 'credit',
 						},
 					},
@@ -101,14 +124,15 @@ class WalletService {
 				throw new Error('Insufficient balance');
 			}
 
-			// Get or create receiver wallet
+			// Get receiver wallet
 			let receiverWallet = await Wallet.findOne({
-				userId: receiverId,
+				_id: receiverId,
 				isGhost,
 			}).session(session);
 			if (!receiverWallet) {
-				receiverWallet = new Wallet({ userId: receiverId, isGhost });
-				await receiverWallet.save({ session });
+				// receiverWallet = new Wallet({ userId: receiverId, isGhost });
+				// await receiverWallet.save({ session });
+				throw new Error('Receiver wallet not found');
 			}
 
 			// Create transaction record

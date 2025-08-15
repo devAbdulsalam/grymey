@@ -12,6 +12,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import { hash, verifyHash } from '../utils/hash.js';
 import sendEmail from '../utils/sendEmail.js';
 import { ApiError } from '../utils/ApiError.js';
+import Wallet from '../models/Wallet.js';
 
 const createToken = (_id, time) => {
 	return jwt.sign({ _id }, process.env.SECRET, { expiresIn: time || '1d' });
@@ -83,7 +84,7 @@ export const loginUser = async (req, res) => {
 			.json({ error: error.message || 'Internal server error.' });
 	}
 };
-export const phoneLoginUser = async (req, res) => {
+export const phoneLogin = async (req, res) => {
 	const { phone, password } = req.body;
 
 	try {
@@ -94,11 +95,12 @@ export const phoneLoginUser = async (req, res) => {
 		}
 		const user = await User.findOne({ phone });
 		if (!user) {
-			return res
-				.status(401)
-				.json({ message: 'Invalid phone or password.' });
+			return res.status(401).json({ message: 'Invalid phone or password.' });
 		}
 
+		// const hashedPassword = await hash(password);
+		// user.password = hashedPassword;
+		// await user.save();
 		const match = await bcrypt.compare(password, user.password);
 		if (!match) {
 			return res
@@ -109,6 +111,7 @@ export const phoneLoginUser = async (req, res) => {
 		const { accessToken, refreshToken } = await createTokens(user._id);
 		const newUser = await User.findOne({ _id: user._id }).select('-password');
 
+		// console.log('newUser', newUser);
 		const options = {
 			httpOnly: true,
 			secure: process.env.NODE_ENV === 'production',
@@ -199,13 +202,15 @@ export const signinUser = async (req, res) => {
 			name,
 			email,
 			phone,
-			hashedPassword,
+			password: hashedPassword,
 		});
+		const wallet = await Wallet.create({ userId: user._id, balance: 0 });
 		// Remove password from the response
 		user.password = undefined;
 
 		res.status(200).json({
 			user,
+			wallet,
 			statusCode: 200,
 			success: true,
 			message: 'Account created successfully, Login to continue',
@@ -713,6 +718,7 @@ export const getUsers = async (req, res) => {
 		const users = await User.find().select(
 			'-password -refreshToken -loginType'
 		);
+			
 		return res.status(200).json(users);
 	} catch (error) {
 		console.log(error);

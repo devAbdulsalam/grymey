@@ -10,7 +10,7 @@ import logger from '../utils/logger.js';
 class EscrowController {
 	async createEscrow(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const escrowData = validateCreateEscrow(req.body);
 
 			const escrow = await escrowService.createEscrow(userId, escrowData);
@@ -36,7 +36,7 @@ class EscrowController {
 
 	async releaseEscrow(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			validateReleaseEscrow(req.body);
 
@@ -59,7 +59,7 @@ class EscrowController {
 
 	async raiseDispute(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			const { reason } = validateRaiseDispute(req.body);
 
@@ -81,6 +81,26 @@ class EscrowController {
 	}
 
 	async getUserEscrows(req, res, next) {
+		try {
+			const { userId } = req.params;
+			const { page, limit, status } = validateGetUserEscrows(req.query);
+
+			const result = await escrowService.getUserEscrows(userId, {
+				page,
+				limit,
+				status,
+			});
+
+			res.json({
+				success: true,
+				...result,
+			});
+		} catch (error) {
+			logger.error(`Get user escrows error: ${error.message}`);
+			next(error);
+		}
+	}
+	async getEscrows(req, res, next) {
 		try {
 			const { userId } = req.params;
 			const { page, limit, status } = validateGetUserEscrows(req.query);

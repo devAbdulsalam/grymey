@@ -29,13 +29,43 @@ const getUserSplitPaymentsSchema = Joi.object({
 });
 
 export function validateCreateSplitPayment(data) {
-	return createSplitPaymentSchema.validate(data, { abortEarly: false });
+	const { value, error } = createSplitPaymentSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateProcessSplitPayment(data) {
-	return processSplitPaymentSchema.validate(data, { abortEarly: false });
+	const { value, error } = processSplitPaymentSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateGetUserSplitPayments(data) {
-	return getUserSplitPaymentsSchema.validate(data, { abortEarly: false });
+	const { value, error } = getUserSplitPaymentsSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

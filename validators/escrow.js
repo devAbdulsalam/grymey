@@ -23,17 +23,56 @@ const getUserEscrowsSchema = Joi.object({
 });
 
 export function validateCreateEscrow(data) {
-	return createEscrowSchema.validate(data, { abortEarly: false });
+	const { value, error } = createEscrowSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateReleaseEscrow(data) {
-	return releaseEscrowSchema.validate(data, { abortEarly: false });
+	const { value, error } = releaseEscrowSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateRaiseDispute(data) {
-	return raiseDisputeSchema.validate(data, { abortEarly: false });
-}
+	const { value, error } = raiseDisputeSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
 
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
+}
 export function validateGetUserEscrows(data) {
-	return getUserEscrowsSchema.validate(data, { abortEarly: false });
+	const { value, error } = getUserEscrowsSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

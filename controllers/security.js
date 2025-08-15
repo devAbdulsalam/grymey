@@ -9,7 +9,7 @@ import logger from '../utils/logger.js';
 class SecurityController {
 	async initiateGhostTransfer(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const ghostData = validateGhostTransfer(req.body);
 
 			const result = await securityService.initiateGhostTransfer(
@@ -32,7 +32,7 @@ class SecurityController {
 
 	async reportFraudulentAccount(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const reportData = validateReportFraud(req.body);
 
 			const result = await securityService.reportFraudulentAccount(
@@ -55,7 +55,7 @@ class SecurityController {
 
 	async verifySuspiciousTransfer(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const verificationData = validateVerifyTransfer(req.body);
 
 			const result = await securityService.verifySuspiciousTransfer(

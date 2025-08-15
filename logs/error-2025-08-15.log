@@ -1,0 +1,46 @@
+2025-08-15 10:23:03 error: 	Transfer funds error: Phone number must be a valid phone number
+2025-08-15 10:36:51 error: 	Error getting wallet for user with phone 90880951224: User not found
+2025-08-15 10:36:51 error: 	Transfer funds error: User not found
+2025-08-15 11:47:57 error: 	Generate invoice error: "dueDate" must be greater than "now"
+2025-08-15 11:49:49 error: 	Generate invoice error: "dueDate" must be greater than "now"
+2025-08-15 11:52:13 error: 	Create crowdfunding error: "expiresInDays" must be a number
+2025-08-15 12:12:37 error: 	Create split link error: "recipients[0]" must be of type object, "recipients" must contain at least 2 items
+2025-08-15 12:25:10 error: 	Create split link error: "recipients[0]" contains a conflict between exclusive peers [amount, percentage], "recipients[1]" contains a conflict between exclusive peers [amount, percentage]
+2025-08-15 12:46:55 error: 	Get active links error: params is not defined
+2025-08-15 15:09:24 error: 	Get user split payments error: splitPaymentService.getSplitPayments is not a function
+2025-08-15 15:11:20 error: 	Error getting split payments: SplitPayment.paginate is not a function
+2025-08-15 15:11:20 error: 	Get user split payments error: SplitPayment.paginate is not a function
+2025-08-15 15:39:32 error: 	Error getting split payments: SplitPayment.paginate is not a function
+2025-08-15 15:39:32 error: 	Get user split payments error: Failed to retrieve split payments
+2025-08-15 20:20:03 error: 	Authentication error: jwt expired
+2025-08-15 20:45:44 error: 	Error locking money jar 689f8936fa0d5d2d4c1fecf7: MoneyJar validation failed: targetAmount: Path `targetAmount` is required.
+2025-08-15 20:45:44 error: 	Lock money jar error: MoneyJar validation failed: targetAmount: Path `targetAmount` is required.
+2025-08-15 20:48:16 error: 	Error funding money jar 689f8ecf361b4644fa2b50c7: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 20:48:16 error: 	Fund money jar error: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 20:49:10 error: 	Error unlocking money jar 689f8ecf361b4644fa2b50c7: Money jar is not locked
+2025-08-15 20:49:10 error: 	Unlock money jar error: Money jar is not locked
+2025-08-15 20:50:19 error: 	Error unlocking money jar 689f8936fa0d5d2d4c1fecf7: Pro tier required to unlock money jars
+2025-08-15 20:50:19 error: 	Unlock money jar error: Pro tier required to unlock money jars
+2025-08-15 20:52:08 error: 	Error funding money jar 689f8ecf361b4644fa2b50c7: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 20:52:08 error: 	Fund money jar error: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 20:53:36 error: 	Error funding money jar 689f8ecf361b4644fa2b50c7: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 20:53:36 error: 	Fund money jar error: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 21:05:31 error: 	Error funding money jar 689f8ecf361b4644fa2b50c7: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 21:05:31 error: 	Fund money jar error: Wallet validation failed: ledger.2.transactionId: Path `transactionId` is required.
+2025-08-15 21:14:20 error: 	Error funding money jar 689f8ecf361b4644fa2b50c7: Transaction validation failed: type: `jar_funding` is not a valid enum value for path `type`.
+2025-08-15 21:14:20 error: 	Fund money jar error: Transaction validation failed: type: `jar_funding` is not a valid enum value for path `type`.
+2025-08-15 21:15:58 error: 	Error withdrawing from money jar 689f8936fa0d5d2d4c1fecf7: Insufficient funds in money jar
+2025-08-15 21:15:58 error: 	Withdraw from money jar error: Insufficient funds in money jar
+2025-08-15 21:16:32 error: 	Error withdrawing from money jar 689f8936fa0d5d2d4c1fecf7: Insufficient funds in money jar
+2025-08-15 21:16:32 error: 	Withdraw from money jar error: Insufficient funds in money jar
+2025-08-15 21:16:41 error: 	Error withdrawing from money jar 689f8936fa0d5d2d4c1fecf7: Insufficient funds in money jar
+2025-08-15 21:16:41 error: 	Withdraw from money jar error: Insufficient funds in money jar
+2025-08-15 21:18:48 error: 	Error withdrawing from money jar 689f8936fa0d5d2d4c1fecf7: Insufficient funds in money jar
+2025-08-15 21:18:48 error: 	Withdraw from money jar error: Insufficient funds in money jar
+2025-08-15 21:20:51 error: 	MongoDB connection error: querySrv ETIMEOUT _mongodb._tcp.cluster0.mdnflzl.mongodb.net
+2025-08-15 21:23:47 error: 	MongoDB connection error: querySrv ECONNREFUSED _mongodb._tcp.cluster0.mdnflzl.mongodb.net
+2025-08-15 21:29:40 error: 	Error withdrawing from money jar 689f8ecf361b4644fa2b50c7: Cannot access 'amountAfterPenalty' before initialization
+2025-08-15 21:29:40 error: 	Withdraw from money jar error: Cannot access 'amountAfterPenalty' before initialization
+2025-08-15 21:33:17 error: 	Error withdrawing from money jar 689f8ecf361b4644fa2b50c7: Transaction validation failed: type: `jar_withdrawal` is not a valid enum value for path `type`.
+2025-08-15 21:33:17 error: 	Withdraw from money jar error: Transaction validation failed: type: `jar_withdrawal` is not a valid enum value for path `type`.
+2025-08-15 21:45:14 error: 	MongoDB connection error: Server selection timed out after 30000 ms

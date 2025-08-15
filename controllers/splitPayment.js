@@ -9,7 +9,7 @@ import logger from '../utils/logger.js';
 class SplitPaymentController {
 	async createSplitPayment(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const splitData = validateCreateSplitPayment(req.body);
 
 			const splitPayment = await splitPaymentService.createSplitPayment(
@@ -54,7 +54,7 @@ class SplitPaymentController {
 	async processSplitPayment(req, res, next) {
 		try {
 			const { id } = req.params;
-			const { userId } = req.user;
+			const userId = req.user._id;
 			validateProcessSplitPayment(req.body);
 
 			const splitPayment = await splitPaymentService.processSplitPayment(
@@ -78,6 +78,25 @@ class SplitPaymentController {
 		}
 	}
 
+	async getSplitPayments(req, res, next) {
+		try {
+			const { page, limit, status } = validateGetUserSplitPayments(req.query);
+
+			const result = await splitPaymentService.getSplitPayments({
+				page,
+				limit,
+				status,
+			});
+
+			res.json({
+				success: true,
+				...result,
+			});
+		} catch (error) {
+			logger.error(`Get user split payments error: ${error.message}`);
+			next(error);
+		}
+	}
 	async getUserSplitPayments(req, res, next) {
 		try {
 			const { userId } = req.params;

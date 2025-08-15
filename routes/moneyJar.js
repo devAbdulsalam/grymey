@@ -9,6 +9,7 @@ router.use(authMiddleware.authenticate);
 // Money Jar endpoints
 router.post('/', moneyJarController.createMoneyJar);
 router.get('/', moneyJarController.getMoneyJars);
+router.get('/:id', moneyJarController.getMoneyJar);
 router.post('/:id/fund', moneyJarController.fundMoneyJar);
 router.post('/:id/withdraw', moneyJarController.withdrawFromMoneyJar);
 router.post('/:id/lock', moneyJarController.lockMoneyJar);

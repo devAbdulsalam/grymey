@@ -21,15 +21,19 @@ class TransactionService {
 				if (endDate) query.createdAt.$lte = new Date(endDate);
 			}
 
-			const options = {
-				page,
-				limit,
-				sort: { createdAt: -1 },
-				lean: true,
-			};
+			const transactions = await Transaction.find(query)
+				.sort({ createdAt: -1 })
+				.skip((page - 1) * limit)
+				.limit(parseInt(limit));
 
-			const result = await Transaction.paginate(query, options);
-			return result;
+			const total = await Transaction.countDocuments(query);
+
+			return {
+				data: transactions,
+				currentPage: parseInt(page),
+				totalPages: Math.ceil(total / limit),
+				totalItems: total,
+			};
 		} catch (error) {
 			logger.error(
 				`Error getting transactions for user ${userId}: ${error.message}`

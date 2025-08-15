@@ -7,7 +7,7 @@ info:
   contact: { email: ammuftau74@gmail.com }
 
 servers:
-  - url: https://grymey-api.onrender.com/api/v1
+  - url: https://grymey.onrender.com/api/v1
     description: This is the original api URL
   - url: http://localhost:9000/api/v1
     description: This is my local Server
@@ -43,7 +43,7 @@ paths:
                   example: user.email@domain.com
                 phone:
                   type: string
-                  example: 09035095170
+                  example: 90880951785
                 email:
                   type: string
                   example: user.email@domain.com
@@ -199,9 +199,6 @@ paths:
                 password:
                   type: string
                   example: '123456'
-            example:
-              email: 90086951785
-              password: '123456'
       responses:
         '201':
           description: Login user
@@ -1829,44 +1826,84 @@ paths:
                       name: doejohn
                     message: Profile updated successfully
                     success: true
-  /moments:
+  /users:
     get:
       tags:
-        - 🔄 General
-      summary: Get moments
+        - 🔐 Authentication
+      summary: get all users
       description: >-
-        The API endpoint retrieves all moments.
-      operationId: getallmoments
-      parameters:
-        - name: search
-          in: query
-          description: Search by caption.
-          schema:
-            type: string
-            example: Hello
-        - name: date
-          in: query
-          description: Search by date.
-          schema:
-            type: string
-            example: 2025-07-24
-        - name: type
-          in: query
-          description: Search type.
-          schema:
-            type: string
-            enum: ['image', 'video']
-            example: image
-        - name: page
-          in: query
-          schema:
-            type: string
-            example: '1'
-        - name: limit
-          in: query
-          schema:
-            type: string
-            example: '10'
+        The API endpoint allows to get general user.
+      operationId: getGeneralUsers
+      responses:
+        '201':
+          description: get general user
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '500'
+            Date:
+              schema:
+                type: string
+                example: Fri, 30 Jun 2023 06:44:09 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1f4-1q38Sbu25p0UVmeYQmrEv2VrgPg"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            RateLimit-Limit:
+              schema:
+                type: string
+                example: '500'
+            RateLimit-Remaining:
+              schema:
+                type: string
+                example: '495'
+            RateLimit-Reset:
+              schema:
+                type: string
+                example: '772'
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: >-
+                      Users fetched successfully.
+                  success:
+                    type: boolean
+                    example: true
+  /wallet:
+    get:
+      tags:
+        - 🔄 wallet
+      summary: Get wallet
+      description: >-
+        The API endpoint retrieves user wallet.
+      operationId: getuserwallet
       responses:
         '200':
           description: Get moments
@@ -1912,44 +1949,867 @@ paths:
                     type: object
                   message:
                     type: string
-                    example: Moments fetched successfully
+                    example: wallet fetched successfully
                   success:
                     type: boolean
                     example: true
-  /moments/gallery:
+  /wallet/transactions:
     get:
       tags:
-        - 🔄 General
-      summary: Get moments images
+        - 🔄 wallet
+      summary: Get wallet transactions
       description: >-
-        The API endpoint retrieves all moment images.
-      operationId: getmomemtimages
+        The API endpoint retrieves user wallet transactions.
+      operationId: getuserwallettransactions
+      responses:
+        '200':
+          description: Get transactions
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: wallet transactions fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /wallet/transactions/search:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Get wallet transactions search
+      description: >-
+        The API endpoint retrieves search user wallet transactions.
+      operationId: searchuserwallettransactions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 3000
+                reference:
+                  type: string
+                  example: po09jikoio
+                type:
+                  type: string
+                  example: credit
+                startDate:
+                  type: string
+                  example: 2023-06-01
+                endDate:
+                  type: string
+                  example: 2023-06-30
+      responses:
+        '200':
+          description: Get search transactions
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: wallet transactions fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /wallet/fund:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Fund wallet
+      description: The API endpoint to fund wallet request
+      operationId: fund wallet request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 3000
+      responses:
+        '200':
+          description: Fund wallet request
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Wallet funded successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Wallet funded successfully
+                    success: true
+  /wallet/transfer:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Transfer Fund
+      description: The API endpoint to transfer fund from wallet request
+      operationId: transfer fund request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                receiverId:
+                  type: string
+                  example: 689e32e8549793ea39ed5b50
+                amount:
+                  type: string
+                  example: 3000
+      responses:
+        '200':
+          description: Transfer fund from wallet request
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true
+  /wallet/phone-transfer:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Transfer Fund to phone
+      description: The API endpoint to transfer fund from wallet request
+      operationId: transfer fund request to phone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: 9035095223
+                amount:
+                  type: string
+                  example: 3000
+      responses:
+        '200':
+          description: Transfer fund from wallet request
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true
+  /wallet/change-pin:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Change current Pin
+      description: >-
+        The Change Pin API allows logged-in users to update their account
+        pin by providing the old pin as a verification step.
+
+
+        This API provides a secure mechanism for users to change their pin
+        within the application.
+
+
+        By accessing this endpoint and providing the old pin, users can
+        initiate the pin change process and set a new acccount pin of their
+        choice.
+      operationId: changeAccountPassword
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPassword:
+                  type: string
+                  example: 1374
+                oldPassword:
+                  type: string
+                  example: 1234
+      responses:
+        '200':
+          description: Change account pin
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Account pin changed successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Change Account pin:
+                  value:
+                    data: {}
+                    message: Account pin changed successfully
+                    success: true
+  /receive/crowdfunding:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Receive crowdfunding Fund
+      description: The API endpoint to receive crowd funding to wallet request
+      operationId: receive crowd funding to request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: bithday
+                description:
+                  type: string
+                  example: general bithday
+                targetAmount:
+                  type: string
+                  example: 3000
+                expiresInDays:
+                  type: string
+                  example: '2025-08-30'
+      responses:
+        '200':
+          description: Receive crowd fund to wallet
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true  
+  /receive/invoice:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Create payment invoice
+      description: The API endpoint to create payment invoice
+      operationId: create payment invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientName:
+                  type: string
+                  example: Abullahi Suleimain
+                description:
+                  type: string
+                  example: Ayo birthday gift
+                amount:
+                  type: string
+                  example: 3000
+                dueDate:
+                  type: string
+                  example: '2025-08-30'
+      responses:
+        '200':
+          description: Receive crowd fund to wallet
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true  
+  /receive/payment-link:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Create payment invoice link
+      description: The API endpoint to create payment invoice link
+      operationId: create payment invoice link
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                clientName:
+                  type: string
+                  example: Abullahi Suleimain
+                note:
+                  type: string
+                  example: Ayo birthday gift
+                amount:
+                  type: string
+                  example: 3000
+                expiresInDays:
+                  type: string
+                  example: 30
+      responses:
+        '200':
+          description: Receive crowd fund to wallet
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true
+  /receive/split-link:
+    post:
+      tags:
+        - 🔄 wallet
+      summary: Create split payment link
+      description: The API endpoint to create split payment invoice
+      operationId: create split payment invoice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: team building
+                description:
+                  type: string
+                  example: Ayo birthday gift
+                amount:
+                  type: string
+                  example: 5000
+                expiresInDays:
+                  type: string
+                  example: 30
+                recipients: 
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      userId:
+                        type: string
+                        example: 63c7e1e3e6b7f0b7b7b7b7b7
+                      amount:
+                        type: string
+                        example: 2000
+                        description: 'Amount to split or add percentage below'
+                      percentage:
+                        type: string
+                        example: 40
+                        description: 'Percentage of split'
+      responses:
+        '200':
+          description: Receive crowd fund to wallet
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true  
+  /receive/links:
+    get:
+      tags:
+        - 🔄 wallet
+      summary: Get invoice links
+      description: >-
+        The API endpoint retrieves user invoices links.
+      operationId: getuserInvoiceLinks
+      responses:
+        '200':
+          description: Get moments
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: wallet fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /receive/links/{linkId}:
+    get:
+      tags:
+        - 🔄 wallet
+      summary: Get invoice link
+      description: >-
+        The API endpoint retrieves user invoices link.
+      operationId: getuserInvoiceLink
       parameters:
-        - name: search
-          in: query
-          description: Search by caption.
+        - in: path
+          name: linkId
+          required: true
           schema:
             type: string
-            example: Hello
-        - name: date
-          in: query
-          description: Search by date.
-          schema:
-            type: string
-            example: 2025-07-24
-        - name: page
-          in: query
-          schema:
-            type: string
-            example: '1'
-        - name: limit
-          in: query
-          schema:
-            type: string
-            example: '10'
       responses:
         '200':
-          description: Get moment Images
+          description: Get moments
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -1992,21 +2852,21 @@ paths:
                     type: object
                   message:
                     type: string
-                    example: moments images fetched successfully
+                    example: wallet fetched successfully
                   success:
                     type: boolean
-                    example: true
-  /moments/videos:
+                    example: true  
+  /split-payments:
     get:
       tags:
-        - 🔄 General
-      summary: Get moments
+        - 🔄 wallet
+      summary: Get split-payments
       description: >-
-        The API endpoint retrieves all moments videos.
-      operationId: getmomentVideos
+        The API endpoint retrieves user split-payments.
+      operationId: getsplitPayments
       responses:
         '200':
-          description: Get moment Videos
+          description: Get split-payments
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -2049,40 +2909,40 @@ paths:
                     type: object
                   message:
                     type: string
-                    example: Moment videos fetched successfully
+                    example: split payments fetched successfully
                   success:
                     type: boolean
                     example: true
-  /moments/upload-image:
     post:
       tags:
-        - 🔄 General
-      summary: Upload moment
-      description: >-
-        The API endpoint enables users to upload moments.
-      operationId: uploadMoment
+        - 🔄 wallet
+      summary: Create split-payments
+      description: The API endpoint to create split-payments
+      operationId: create split-payments request
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
-                name:
+                title:
                   type: string
-                  example: jame john
-                email:
+                  example: bithday
+                description:
                   type: string
-                  example: abc@gmail.com
-                image:
-                  description: File
+                  example: general bithday
+                totalAmount:
                   type: string
-                  format: binary
-                caption:
+                  example: 3000
+                receiverId:
                   type: string
-                  example: hello world
+                  example: 9399303iueiu983iu3
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
       responses:
         '200':
-          description: Upload moment
+          description: Receive crowd fund to wallet
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -2099,31 +2959,19 @@ paths:
             Content-Length:
               schema:
                 type: string
-                example: '910'
+                example: '105'
             Date:
               schema:
                 type: string
-                example: Fri, 30 Jun 2023 06:45:46 GMT
+                example: Wed, 31 May 2023 19:56:15 GMT
             ETag:
               schema:
                 type: string
-                example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
             Keep-Alive:
               schema:
                 type: string
                 example: timeout=5
-            RateLimit-Limit:
-              schema:
-                type: string
-                example: '500'
-            RateLimit-Remaining:
-              schema:
-                type: string
-                example: '490'
-            RateLimit-Reset:
-              schema:
-                type: string
-                example: '572'
             X-Powered-By:
               schema:
                 type: string
@@ -2135,41 +2983,37 @@ paths:
                 properties:
                   data:
                     type: object
+                    properties: {}
                   message:
                     type: string
-                    example: Moment uploaded successfully
-  /moments/upload-images:
-    post:
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true
+  /split-payment/user/{userId}:
+    get:
       tags:
-        - 🔄 General
-      summary: Upload moment images
+        - 🔄 wallet
+      summary: Get user split-payments
       description: >-
-        The API endpoint enables users to upload moment images.
-      operationId: uploadMomentImages
-      requestBody:
-        content:
-          multipart/form-data:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                  example: jame john
-                email:
-                  type: string
-                  example: abc@gmail.com
-                images:
-                  type: array
-                  items:
-                    description: File
-                    type: string
-                    format: binary
-                caption:
-                  type: string
-                  example: hello world
+        The API endpoint retrieves user split payments.
+      operationId: getuserwallet
+      parameters:
+        - name: userId
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
       responses:
         '200':
-          description: Upload moment images
+          description: Get split payments
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -2186,31 +3030,19 @@ paths:
             Content-Length:
               schema:
                 type: string
-                example: '910'
+                example: '1126'
             Date:
               schema:
                 type: string
-                example: Fri, 30 Jun 2023 06:45:46 GMT
+                example: Thu, 01 Jun 2023 05:44:27 GMT
             ETag:
               schema:
                 type: string
-                example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
             Keep-Alive:
               schema:
                 type: string
                 example: timeout=5
-            RateLimit-Limit:
-              schema:
-                type: string
-                example: '500'
-            RateLimit-Remaining:
-              schema:
-                type: string
-                example: '490'
-            RateLimit-Reset:
-              schema:
-                type: string
-                example: '572'
             X-Powered-By:
               schema:
                 type: string
@@ -2224,37 +3056,41 @@ paths:
                     type: object
                   message:
                     type: string
-                    example: Moment images uploaded successfully
-  /moments/upload-video:
+                    example: user split-payments fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /split-payments/{splitPaymentId}:
     post:
       tags:
-        - 🔄 General
-      summary: Upload moment video
-      description: >-
-        The API endpoint enables users to upload video moments.
-      operationId: uploadMomentVideo
+        - 🔄 wallet
+      summary: Pay split-payments
+      description: The API endpoint to pay a split-payments
+      operationId: pay a split-payments request
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
-                name:
+                title:
                   type: string
-                  example: jame john
-                email:
+                  example: bithday
+                description:
                   type: string
-                  example: abc@gmail.com
-                video:
-                  description: File
+                  example: general bithday
+                totalAmount:
                   type: string
-                  format: binary
-                caption:
+                  example: 3000
+                receiverId:
                   type: string
-                  example: hello world
+                  example: 9399303iueiu983iu3
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
       responses:
         '200':
-          description: Upload moment video
+          description: pay a split-payments
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -2271,31 +3107,19 @@ paths:
             Content-Length:
               schema:
                 type: string
-                example: '910'
+                example: '105'
             Date:
               schema:
                 type: string
-                example: Fri, 30 Jun 2023 06:45:46 GMT
+                example: Wed, 31 May 2023 19:56:15 GMT
             ETag:
               schema:
                 type: string
-                example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
             Keep-Alive:
               schema:
                 type: string
                 example: timeout=5
-            RateLimit-Limit:
-              schema:
-                type: string
-                example: '500'
-            RateLimit-Remaining:
-              schema:
-                type: string
-                example: '490'
-            RateLimit-Reset:
-              schema:
-                type: string
-                example: '572'
             X-Powered-By:
               schema:
                 type: string
@@ -2307,41 +3131,47 @@ paths:
                 properties:
                   data:
                     type: object
+                    properties: {}
                   message:
                     type: string
-                    example: Moment video uploaded successfully
-  /moments/uploads:
+                    example: Payment successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Payment successfully
+                    success: true
+  /split-payments/{splitPaymentId}/process:
     post:
       tags:
-        - 🔄 General
-      summary: Upload moment
-      description: >-
-        The API endpoint enables users to upload multiple moments.
-      operationId: uploadMultipleMoment
+        - 🔄 wallet
+      summary: process split-payments
+      description: The API endpoint to process split-payments request
+      operationId: processsplit-paymentsrequest
       requestBody:
         content:
-          multipart/form-data:
+          application/json:
             schema:
               type: object
               properties:
-                name:
+                title:
                   type: string
-                  example: jame john
-                email:
+                  example: bithday
+                description:
                   type: string
-                  example: abc@gmail.com
-                files:
-                  type: array
-                  items:
-                    description: File
-                    type: string
-                    format: binary
-                caption:
+                  example: general bithday
+                amount:
                   type: string
-                  example: hello world
+                  example: 3000
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
       responses:
         '200':
-          description: Upload multiple moment
+          description: Process split-payments
           headers:
             Access-Control-Allow-Credentials:
               schema:
@@ -2358,31 +3188,83 @@ paths:
             Content-Length:
               schema:
                 type: string
-                example: '910'
+                example: '105'
             Date:
               schema:
                 type: string
-                example: Fri, 30 Jun 2023 06:45:46 GMT
+                example: Wed, 31 May 2023 19:56:15 GMT
             ETag:
               schema:
                 type: string
-                example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
             Keep-Alive:
               schema:
                 type: string
                 example: timeout=5
-            RateLimit-Limit:
+            X-Powered-By:
               schema:
                 type: string
-                example: '500'
-            RateLimit-Remaining:
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Transfer successfully
+                    success: true
+  /escrow:
+    get:
+      tags:
+        - 🔄 escrow
+      summary: Get escrow
+      description: >-
+        The API endpoint retrieves all escrow.
+      operationId: getallescrow
+      responses:
+        '200':
+          description: Get escrow
+          headers:
+            Access-Control-Allow-Credentials:
               schema:
                 type: string
-                example: '490'
-            RateLimit-Reset:
+                example: 'true'
+            Access-Control-Allow-Origin:
               schema:
                 type: string
-                example: '572'
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
             X-Powered-By:
               schema:
                 type: string
@@ -2396,7 +3278,2538 @@ paths:
                     type: object
                   message:
                     type: string
-                    example: Multiple moment uploaded successfully
+                    example: Escrow fetched successfully
+                  success:
+                    type: boolean
+                    example: true    
+    post:
+      tags:
+        - 🔄 escrow
+      summary: create escrow
+      description: create escrow.
+      operationId: createescrow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                receiverId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+                description:
+                  type: string
+                  example: save some money for my school fees
+                conditions:
+                  type: string
+                  example: save some money for my school fees
+                expiresInDays:
+                  type: string
+                  example: '2025-09-30'
+                amount:
+                  type: string
+                  example: 300000
+      responses:
+        '200':
+          description: create escrow.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: escrow created successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: escrow created successfully
+                    success: true
+  /escrow/{escrowId}:
+    get:
+      tags:
+        - 🔄 moneyjar
+      summary: Get escrow by id
+      description: >-
+        The API endpoint retrieves escrow by id by id.
+      operationId: get escrow by id
+      responses:
+        '200':
+          description: Get escrow by id
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: Escrow fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /escrow/{escrowId}/release:
+    post:
+      tags:
+        - 🔄 escrow
+      summary: release escrow
+      description: The API endpoint to release escrow request
+      operationId: releaseescrow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: bithday
+                description:
+                  type: string
+                  example: general bithday
+                amount:
+                  type: string
+                  example: 3000
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
+      responses:
+        '200':
+          description: Release escrow
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Escrow release successfully
+                  success:
+                    type: boolean
+                    example: true 
+  /jars:
+    get:
+      tags:
+        - 🔄 moneyjar
+      summary: Get money jar
+      description: >-
+        The API endpoint retrieves all  money jar.
+      operationId: getall money jar
+      responses:
+        '200':
+          description: Get  money jar
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: Money jar fetched successfully
+                  success:
+                    type: boolean
+                    example: true    
+    post:
+      tags:
+        - 🔄 moneyjar
+      summary: create money jar
+      description: create money jar.
+      operationId: createmoneyjar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: school fees
+                description:
+                  type: string
+                  example: save some money for my school fees
+                maturityDate:
+                  type: string
+                  example: '2025-09-30'
+                targetAmount:
+                  type: string
+                  example: 300000
+                autoDebit:
+                  type: object
+                  properties:
+                    isActive:
+                      type: boolean
+                      example: true
+                    amount:
+                      type: number
+                      example: 300
+                    frequency:
+                      type: string
+                      enum: [daily, weekly, monthly, yearly]
+                      example: daily
+                type:
+                  type: string
+                  enum: [individual, group]
+                  example: individual
+      responses:
+        '200':
+          description: create money jar.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Money jar created successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Money jar created successfully
+                    success: true
+  /jars/{jarId}:
+    get:
+      tags:
+        - 🔄 moneyjar
+      summary: Get money jar
+      description: >-
+        The API endpoint retrieves money jar by id.
+      operationId: get money jar
+      responses:
+        '200':
+          description: Get money jar
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: Money jar fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /jars/{jarId}/fund:
+    post:
+      tags:
+        - 🔄 moneyjar
+      summary: fund money jar
+      description: fund money jar.
+      operationId: fundmoneyjar
+      parameters:
+        - name: jarId
+          in: path
+          description: ID of the jar
+          required: true 
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 3000
+      responses:
+        '200':
+          description: fund money jar.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Money jar funded successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Money jar funded successfully
+                    success: true
+  /jars/{jarId}/withdraw:
+    post:
+      tags:
+        - 🔄 moneyjar
+      summary: withdraw money from jar
+      description: withdraw money from jar.
+      operationId: withdrawmoneyjar
+      parameters:
+        - name: jarId
+          in: path
+          description: ID of the jar
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 3000
+      responses:
+        '200':
+          description: withdraw money from jar.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Money jar withdraw successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Money jar withdraw successfully
+                    success: true
+  /jars/{jarId}/lock:
+    post:
+      tags:
+        - 🔄 moneyjar
+      summary: lock money jar
+      description: lock money jar.
+      operationId: lockmoneyjar
+      parameters:
+        - name: jarId
+          in: path
+          description: ID of the jar
+          required: true
+      responses:
+        '200':
+          description: lock money jar.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Money jar lock successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Money jar lock successfully
+                    success: true
+  /jars/{jarId}/unlock:
+    post:
+      tags:
+        - 🔄 moneyjar
+      summary: unlock money jar
+      description: unlock money jar.
+      operationId: unlockmoneyjar
+      parameters:
+        - name: jarId
+          in: path
+          description: ID of the jar
+          required: true
+      responses:
+        '200':
+          description: unlock money jar.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Money jar unlocked successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Forgot password request:
+                  value:
+                    data: {}
+                    message: Money jar unlocked successfully
+                    success: true
+  /services:
+    get:
+      tags:
+        - 👨‍💼 Services
+      summary: Get services balance
+      description: >-
+        The API endpoint retrieves user service balance.
+      responses:
+        '200':
+          description: Get service balance
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '10757'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  example: {}
+  /services/cables:
+    get:
+      tags:
+        - 👨‍💼 Services
+      summary: Get cable services
+      description: >-
+        The API endpoint retrieves a list of bill services.
+      responses:
+        '200':
+          description: Get cable service
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '10757'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  example: {}
+  /services/banks:
+    get:
+      tags:
+        - 👨‍💼 Services
+      summary: Get banks
+      description: >-
+        The API endpoint retrieves a list of bill services.
+      responses:
+        '200':
+          description: Get cable service
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '10757'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  example: {}
+  /services/networks:
+    get:
+      tags:
+        - 👨‍💼 Services
+      summary: Get net services
+      description: >-
+        The API endpoint retrieves a list of bill services.
+      responses:
+        '200':
+          description: Get cable service
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '10757'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  example: {}
+  /services/verify-phone:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Verify Phone
+      description: >-
+        Verify phone
+      operationId: verifyPhone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: '09035095173'
+            example:
+              phone: '09035095173'
+      responses:
+        '200':
+          description: Verify phone
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/buy-airtime:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Buy data
+      description: >-
+        Buy data
+      operationId: buyData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: '09035095173'
+                network:
+                  type: string
+                  example: 1
+                plan:
+                  type: string
+                  example: 500
+            example:
+              phone: '09035095173'
+              network: 1
+              plan: 500
+      responses:
+        '200':
+          description: buy data
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/buy-data:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Buy data
+      description: >-
+        Buy data
+      operationId: buyData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: '09035095173'
+                network:
+                  type: string
+                  example: 1
+                plan:
+                  type: string
+                  example: 500
+            example:
+              phone: '09035095173'
+              network: 1
+              plan: 500
+      responses:
+        '200':
+          description: buy data
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/purchase-bill:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Purchase bill
+      description: >-
+        Purchase bill
+      operationId: purchase bill
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                phone:
+                  type: string
+                  example: '0904509095173'
+                network:
+                  type: string
+                  example: 1
+                plan:
+                  type: string
+                  example: 500
+            example:
+              phone: '09035865173'
+              network: 1
+              plan: 500
+      responses:
+        '200':
+          description: Purchase bill
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/verify-bvn:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Verify BVN
+      description: >-
+        Verify bvn
+      operationId: verifyBvn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  example: new
+                lastname:
+                  type: string
+                  example: test
+                phone:
+                  type: string
+                  example: 99098123
+                bvn:
+                  type: string
+                  example: 878009123
+            example:
+              firstname: abdulsalam
+              lastname: mohammed
+              phone: '09012345789'
+              bvn: '12134244'
+      responses:
+        '200':
+          description: Verify bvn
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/verify-nin:
+    post:
+      tags:
+        - 👨‍💼 Services
+      summary: Verify NIN
+      description: >-
+        Verify nin
+      operationId: verifyNin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstname:
+                  type: string
+                  example: new
+                lastname:
+                  type: string
+                  example: test
+                phone:
+                  type: string
+                  example: 99098123
+                nin:
+                  type: string
+                  example: 878009123
+            example:
+              firstname: abdulsalam
+              lastname: mohammed
+              phone: '09005909513'
+              nin: '37604587858'
+      responses:
+        '200':
+          description: Verify nin
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+  /services/bettings:
+    get:
+      tags:
+        - 👨‍💼 Services
+      summary: Get betting services
+      description: >-
+        The API endpoint retrieves a list of bill services.
+      responses:
+      '200':
+        description: Get cable service
+        headers:
+          Access-Control-Allow-Credentials:
+            schema:
+              type: string
+              example: 'true'
+          Access-Control-Allow-Origin:
+            schema:
+              type: string
+              example: '*'
+          Connection:
+            schema:
+              type: string
+              example: keep-alive
+          Content-Length:
+            schema:
+              type: string
+              example: '10757'
+          Date:
+            schema:
+              type: string
+              example: Thu, 01 Jun 2023 05:44:13 GMT
+          ETag:
+            schema:
+              type: string
+              example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+          Keep-Alive:
+            schema:
+              type: string
+              example: timeout=5
+          X-Powered-By:
+            schema:
+              type: string
+              example: Express
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                example: {}
+  /circles/search:
+    get:
+      tags:
+        - 🔄 wallet
+      summary: Get circles
+      description: >-
+        The API endpoint retrieves circles.
+      operationId: searchcircles
+      responses:
+        '200':
+          description: searchcircles
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: circles fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  
+  # /moments:
+  #   get:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Get moments
+  #     description: >-
+  #       The API endpoint retrieves all moments.
+  #     operationId: getallmoments
+  #     parameters:
+  #       - name: search
+  #         in: query
+  #         description: Search by caption.
+  #         schema:
+  #           type: string
+  #           example: Hello
+  #       - name: date
+  #         in: query
+  #         description: Search by date.
+  #         schema:
+  #           type: string
+  #           example: 2025-07-24
+  #       - name: type
+  #         in: query
+  #         description: Search type.
+  #         schema:
+  #           type: string
+  #           enum: ['image', 'video']
+  #           example: image
+  #       - name: page
+  #         in: query
+  #         schema:
+  #           type: string
+  #           example: '1'
+  #       - name: limit
+  #         in: query
+  #         schema:
+  #           type: string
+  #           example: '10'
+  #     responses:
+  #       '200':
+  #         description: Get moments
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '1126'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Thu, 01 Jun 2023 05:44:27 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: Moments fetched successfully
+  #                 success:
+  #                   type: boolean
+  #                   example: true
+  # /moments/gallery:
+  #   get:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Get moments images
+  #     description: >-
+  #       The API endpoint retrieves all moment images.
+  #     operationId: getmomemtimages
+  #     parameters:
+  #       - name: search
+  #         in: query
+  #         description: Search by caption.
+  #         schema:
+  #           type: string
+  #           example: Hello
+  #       - name: date
+  #         in: query
+  #         description: Search by date.
+  #         schema:
+  #           type: string
+  #           example: 2025-07-24
+  #       - name: page
+  #         in: query
+  #         schema:
+  #           type: string
+  #           example: '1'
+  #       - name: limit
+  #         in: query
+  #         schema:
+  #           type: string
+  #           example: '10'
+  #     responses:
+  #       '200':
+  #         description: Get moment Images
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '1126'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Thu, 01 Jun 2023 05:44:27 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: moments images fetched successfully
+  #                 success:
+  #                   type: boolean
+  #                   example: true
+  # /moments/videos:
+  #   get:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Get moments
+  #     description: >-
+  #       The API endpoint retrieves all moments videos.
+  #     operationId: getmomentVideos
+  #     responses:
+  #       '200':
+  #         description: Get moment Videos
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '1126'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Thu, 01 Jun 2023 05:44:27 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: Moment videos fetched successfully
+  #                 success:
+  #                   type: boolean
+  #                   example: true
+  # /moments/upload-image:
+  #   post:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Upload moment
+  #     description: >-
+  #       The API endpoint enables users to upload moments.
+  #     operationId: uploadMoment
+  #     requestBody:
+  #       content:
+  #         multipart/form-data:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #                 example: jame john
+  #               email:
+  #                 type: string
+  #                 example: abc@gmail.com
+  #               image:
+  #                 description: File
+  #                 type: string
+  #                 format: binary
+  #               caption:
+  #                 type: string
+  #                 example: hello world
+  #     responses:
+  #       '200':
+  #         description: Upload moment
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '910'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Fri, 30 Jun 2023 06:45:46 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           RateLimit-Limit:
+  #             schema:
+  #               type: string
+  #               example: '500'
+  #           RateLimit-Remaining:
+  #             schema:
+  #               type: string
+  #               example: '490'
+  #           RateLimit-Reset:
+  #             schema:
+  #               type: string
+  #               example: '572'
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: Moment uploaded successfully
+  # /moments/upload-images:
+  #   post:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Upload moment images
+  #     description: >-
+  #       The API endpoint enables users to upload moment images.
+  #     operationId: uploadMomentImages
+  #     requestBody:
+  #       content:
+  #         multipart/form-data:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #                 example: jame john
+  #               email:
+  #                 type: string
+  #                 example: abc@gmail.com
+  #               images:
+  #                 type: array
+  #                 items:
+  #                   description: File
+  #                   type: string
+  #                   format: binary
+  #               caption:
+  #                 type: string
+  #                 example: hello world
+  #     responses:
+  #       '200':
+  #         description: Upload moment images
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '910'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Fri, 30 Jun 2023 06:45:46 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           RateLimit-Limit:
+  #             schema:
+  #               type: string
+  #               example: '500'
+  #           RateLimit-Remaining:
+  #             schema:
+  #               type: string
+  #               example: '490'
+  #           RateLimit-Reset:
+  #             schema:
+  #               type: string
+  #               example: '572'
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: Moment images uploaded successfully
+  # /moments/upload-video:
+  #   post:
+  #     tags:
+  #       - 🔄 General
+  #     summary: Upload moment video
+  #     description: >-
+  #       The API endpoint enables users to upload video moments.
+  #     operationId: uploadMomentVideo
+  #     requestBody:
+  #       content:
+  #         multipart/form-data:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               name:
+  #                 type: string
+  #                 example: jame john
+  #               email:
+  #                 type: string
+  #                 example: abc@gmail.com
+  #               video:
+  #                 description: File
+  #                 type: string
+  #                 format: binary
+  #               caption:
+  #                 type: string
+  #                 example: hello world
+  #     responses:
+  #       '200':
+  #         description: Upload moment video
+  #         headers:
+  #           Access-Control-Allow-Credentials:
+  #             schema:
+  #               type: string
+  #               example: 'true'
+  #           Access-Control-Allow-Origin:
+  #             schema:
+  #               type: string
+  #               example: '*'
+  #           Connection:
+  #             schema:
+  #               type: string
+  #               example: keep-alive
+  #           Content-Length:
+  #             schema:
+  #               type: string
+  #               example: '910'
+  #           Date:
+  #             schema:
+  #               type: string
+  #               example: Fri, 30 Jun 2023 06:45:46 GMT
+  #           ETag:
+  #             schema:
+  #               type: string
+  #               example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+  #           Keep-Alive:
+  #             schema:
+  #               type: string
+  #               example: timeout=5
+  #           RateLimit-Limit:
+  #             schema:
+  #               type: string
+  #               example: '500'
+  #           RateLimit-Remaining:
+  #             schema:
+  #               type: string
+  #               example: '490'
+  #           RateLimit-Reset:
+  #             schema:
+  #               type: string
+  #               example: '572'
+  #           X-Powered-By:
+  #             schema:
+  #               type: string
+  #               example: Express
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: object
+  #               properties:
+  #                 data:
+  #                   type: object
+  #                 message:
+  #                   type: string
+  #                   example: Moment video uploaded successfully
+  # /moments/uploads:
+  # post:
+  #   tags:
+  #     - 🔄 General
+  #   summary: Upload moment
+  #   description: >-
+  #     The API endpoint enables users to upload multiple moments.
+  #   operationId: uploadMultipleMoment
+  #   requestBody:
+  #     content:
+  #       multipart/form-data:
+  #         schema:
+  #           type: object
+  #           properties:
+  #             name:
+  #               type: string
+  #               example: jame john
+  #             email:
+  #               type: string
+  #               example: abc@gmail.com
+  #             files:
+  #               type: array
+  #               items:
+  #                 description: File
+  #                 type: string
+  #                 format: binary
+  #             caption:
+  #               type: string
+  #               example: hello world
+  #   responses:
+  #     '200':
+  #       description: Upload multiple moment
+  #       headers:
+  #         Access-Control-Allow-Credentials:
+  #           schema:
+  #             type: string
+  #             example: 'true'
+  #         Access-Control-Allow-Origin:
+  #           schema:
+  #             type: string
+  #             example: '*'
+  #         Connection:
+  #           schema:
+  #             type: string
+  #             example: keep-alive
+  #         Content-Length:
+  #           schema:
+  #             type: string
+  #             example: '910'
+  #         Date:
+  #           schema:
+  #             type: string
+  #             example: Fri, 30 Jun 2023 06:45:46 GMT
+  #         ETag:
+  #           schema:
+  #             type: string
+  #             example: W/"38e-+vTTKQiTCppZaCs9tEWJWWsmzZI"
+  #         Keep-Alive:
+  #           schema:
+  #             type: string
+  #             example: timeout=5
+  #         RateLimit-Limit:
+  #           schema:
+  #             type: string
+  #             example: '500'
+  #         RateLimit-Remaining:
+  #           schema:
+  #             type: string
+  #             example: '490'
+  #         RateLimit-Reset:
+  #           schema:
+  #             type: string
+  #             example: '572'
+  #         X-Powered-By:
+  #           schema:
+  #             type: string
+  #             example: Express
+  #       content:
+  #         application/json:
+  #           schema:
+  #             type: object
+  #             properties:
+  #               data:
+  #                 type: object
+  #               message:
+  #                 type: string
+  #                 example: Multiple moment uploaded successfully
+  /client/balance:
+    get:
+      tags:
+        - 📝 Client
+      summary: Get user balance
+      description: >-
+        The API endpoint allows you to retrieve the balance of your account.
+      operationId: getUserBalance
+      responses:
+        '200':
+          description: Get user balance
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '443'
+            Date:
+              schema:
+                type: string
+                example: Fri, 30 Jun 2023 06:44:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1bb-YVaffq7t8o3of0yDl9g26tprr/8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            RateLimit-Limit:
+              schema:
+                type: string
+                example: '500'
+            RateLimit-Remaining:
+              schema:
+                type: string
+                example: '493'
+            RateLimit-Reset:
+              schema:
+                type: string
+                example: '631'
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 649e795264e7dba29b726936
+                      balance:
+                        type: number
+                        example: 1222
+                      updatedAt:
+                        type: string
+                        example: '2023-06-30T06:44:29.831Z'
+                  message:
+                    type: string
+                    example: Current user fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Get user balance:
+                  value:
+                    data:
+                      _id: 649e795264e7dba29b726936
+                      balance: 900
+                      updatedAt: '2023-06-30T06:44:29.831Z'
+  /client/cards:
+    post:
+      tags:
+        - 📝 Client
+      summary: Add card
+      description: >-
+        The Add Card API allows logged-in users to add back card to their account.
+      operationId: addCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  example: 897jii8u97089e
+                name:
+                  type: string
+                  example: james king
+                number:
+                  type: string
+                  example: 1374455465655
+                expe:
+                  type: string
+                  example: 12/24
+                expire:
+                  type: number
+                  example: 124
+            example:
+              userId: 13744524r5344
+              name: monday david
+              number: 13743432435
+              expire: 12/34
+              cvv: 134
+      responses:
+        '200':
+          description: Add account card
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '85'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:59:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"55-CyGJCaxqcCXrzMloar9z7m95mvk"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Card added successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                Add account card:
+                  value:
+                    data: {}
+                    message: Card added successfully
+                    success: true
+    get:
+      tags:
+        - 📝 Client
+      summary: Get card
+      description: >-
+        The API endpoint retrieves a list of card.
+      operationId: getCards
+      responses:
+        '200':
+          description: Get cards
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '10757'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:13 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                              example: 649e795264e7dba29b726936
+                            userId:
+                              type: string
+                              example: 649e795264e7dba29b726936
+                            number:
+                              type: number
+                              example: 89974059435
+                            cvv:
+                              type: string
+                              example: 649e795264e7dba29b726336
+                            name:
+                              type: string
+                              example: david muda
+                            expire:
+                              type: string
+                              example: 649e795264e7dba29b726336
+                        example:
+                          _id: 68poi09ii99iou8946359
+                          userId: 68poi09ii99iou8946359
+                          cvv: 689
+                          expire: 12/20
+                          number: 08909789789
+                          name: Joseph
+                  message:
+                    type: string
+                    example: Card fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+              examples:
+                # edit title
+                Get card:
+                  value:
+                    data:
+                      data:
+                        - userId: 649e795264e7dba29b96936
+                          _id: 649e795264e7dba29b726036
+                          name: jame monday
+                          number: 987948749
+                          cvv: 7897
+                          expire: 12/26
+                        - _id: 649e795264e7dba29b726036
+                          userId: 649e795264e7dba29b96936
+                          name: musa kano
+                          number: 123120
+                          cvv: 274
+                          expire: 03/25
+                    message: Card fetched successfully
+                    success: true
+    delete:
+      tags:
+        - 📝 Client
+      summary: Delete user cards
+      description: >-
+        The API endpoint allows you to delete cards.
+      operationId: deleteCards
+      responses:
+        '200':
+          description: Delete user card by id
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '443'
+            Date:
+              schema:
+                type: string
+                example: Fri, 30 Jun 2023 06:44:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1bb-YVaffq7t8o3of0yDl9g26tprr/8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            RateLimit-Limit:
+              schema:
+                type: string
+                example: '500'
+            RateLimit-Remaining:
+              schema:
+                type: string
+                example: '493'
+            RateLimit-Reset:
+              schema:
+                type: string
+                example: '631'
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                        example: cards deleted succefully
+                      status:
+                        type: string
+                        example: success
+  /client/cards/{cardId}:
+    get:
+      tags:
+        - 📝 Client
+      summary: Get user card by id
+      description: >-
+        The API endpoint allows you to retrieve user card by id.
+      operationId: getUserCardById
+      responses:
+        '200':
+          description: Get user card by id
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '443'
+            Date:
+              schema:
+                type: string
+                example: Fri, 30 Jun 2023 06:44:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1bb-YVaffq7t8o3of0yDl9g26tprr/8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            RateLimit-Limit:
+              schema:
+                type: string
+                example: '500'
+            RateLimit-Remaining:
+              schema:
+                type: string
+                example: '493'
+            RateLimit-Reset:
+              schema:
+                type: string
+                example: '631'
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+    delete:
+      tags:
+        - 📝 Client
+      summary: Delete user card by id
+      description: >-
+        The API endpoint allows you to delete card by id.
+      operationId: deleteCardById
+      responses:
+        '200':
+          description: Delete user card by id
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '443'
+            Date:
+              schema:
+                type: string
+                example: Fri, 30 Jun 2023 06:44:47 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"1bb-YVaffq7t8o3of0yDl9g26tprr/8"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            RateLimit-Limit:
+              schema:
+                type: string
+                example: '500'
+            RateLimit-Remaining:
+              schema:
+                type: string
+                example: '493'
+            RateLimit-Reset:
+              schema:
+                type: string
+                example: '631'
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: 649e795264e7dba29b726936
+                      userId:
+                        type: string
+                        example: 649e795264e7dba29b726936
+                      number:
+                        type: number
+                        example: 89974059435
+                      cvv:
+                        type: string
+                        example: 649e795264e7dba29b726336
+                      name:
+                        type: string
+                        example: david muda
+                      expire:
+                        type: string
+                        example: 649e795264e7dba29b726336
+                  example:
+                    _id: 68poi09ii99iou8946359
+                    userId: 68poi09ii99iou8946359
+                    cvv: 689
+                    expire: 12/20
+                    number: 08909789789
+                    name: Joseph
+    parameters:
+      - name: cardId
+        in: path
+        # required: true
+        description: The card id.
+        schema:
+          type: string
   tags:
     - name: 🔐 Authentication
       description: >-
@@ -2404,3 +5817,6 @@ paths:
     - name: 🔄 General
       description: >-
         This section encompasses all other APIs.
+    - name: 👨‍💼 Services
+      description: >-
+        This section encompasses all other APIs related to payment, airtime, data, etc.

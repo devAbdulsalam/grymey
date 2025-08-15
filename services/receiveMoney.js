@@ -8,7 +8,7 @@ import mongoose from 'mongoose';
 
 class ReceiveMoneyService {
 	constructor() {
-		this.baseUrl = process.env.BASE_URL || 'https://api.grymey.com';
+		this.baseUrl = process.env.BASE_URL || 'https://grymey.onrender.com/api/v1';
 	}
 
 	async generateInvoice(userId, invoiceData) {
@@ -210,6 +210,18 @@ class ReceiveMoneyService {
 			logger.error(
 				`Error getting active links for user ${userId}: ${error.message}`
 			);
+			throw error;
+		}
+	}
+	async getPaymentLink(paymentId, userId) {
+		try {
+			const paymentLinks = await PaymentLink.findOne({
+				_id: paymentId,
+				userId,
+			});
+			return paymentLinks;
+		} catch (error) {
+			logger.error(`Error getting link for  ${paymentId}: ${error.message}`);
 			throw error;
 		}
 	}

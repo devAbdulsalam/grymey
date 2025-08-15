@@ -5,7 +5,7 @@ const moneyJarSchema = new Schema({
 	userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
 	name: { type: String, required: true },
 	description: { type: String },
-	targetAmount: { type: Number, min: 0 },
+	targetAmount: { type: Number, min: 0, required: true },
 	currentAmount: { type: Number, default: 0, min: 0 },
 	isLocked: { type: Boolean, default: false },
 	lockedAt: { type: Date },

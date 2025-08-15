@@ -22,7 +22,7 @@ class BillController {
 
 	async payBill(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const billData = validatePayBill(req.body);
 
 			const { billPayment, transaction } = await billService.payBill(
@@ -55,7 +55,7 @@ class BillController {
 
 	async getPaymentHistory(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { page, limit, providerId, status } = validateGetPaymentHistory(
 				req.query
 			);

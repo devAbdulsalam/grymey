@@ -9,7 +9,7 @@ import logger from '../utils/logger.js';
 class VirtualCardController {
 	async requestNewCard(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const cardData = validateRequestNewCard(req.body);
 
 			const card = await virtualCardService.requestNewCard(userId, cardData);
@@ -26,7 +26,7 @@ class VirtualCardController {
 
 	async getUserCards(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 
 			const cards = await virtualCardService.getUserCards(userId);
 
@@ -42,7 +42,7 @@ class VirtualCardController {
 
 	async fundCard(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			const { amount } = validateFundCard(req.body);
 
@@ -72,7 +72,7 @@ class VirtualCardController {
 
 	async freezeCard(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			validateFreezeCard(req.body);
 
@@ -95,7 +95,7 @@ class VirtualCardController {
 
 	async getCardTransactions(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 
 			const transactions = await virtualCardService.getCardTransactions(
@@ -115,7 +115,7 @@ class VirtualCardController {
 
 	async getCardSubscriptions(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 
 			const subscriptions = await virtualCardService.getCardSubscriptions(

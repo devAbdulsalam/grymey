@@ -21,6 +21,7 @@ const recipientSchema = Joi.object({
 
 const createSplitLinkSchema = Joi.object({
 	title: Joi.string().trim().min(2).max(100).required(),
+	totalAmount: Joi.number().positive().max(100000000).optional(),
 	recipients: Joi.array().items(recipientSchema).min(2).max(10).required(),
 	expiresInDays: Joi.number().integer().min(1).max(365).optional(),
 });
@@ -33,17 +34,57 @@ const createCrowdfundingSchema = Joi.object({
 });
 
 export function validateGenerateInvoice(data) {
-	return generateInvoiceSchema.validate(data, { abortEarly: false });
+	const { value, error } = generateInvoiceSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateCreatePaymentLink(data) {
-	return createPaymentLinkSchema.validate(data, { abortEarly: false });
+	const { value, error } = createPaymentLinkSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateCreateSplitLink(data) {
-	return createSplitLinkSchema.validate(data, { abortEarly: false });
+	const { value, error } = createSplitLinkSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateCreateCrowdfunding(data) {
-	return createCrowdfundingSchema.validate(data, { abortEarly: false });
+	const { value, error } = createCrowdfundingSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

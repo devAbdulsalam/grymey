@@ -8,6 +8,7 @@ router.use(authMiddleware.authenticate);
 
 // Wallet endpoints
 router.get('/', ghostModeMiddleware.checkGhostMode, walletController.getWallet);
+router.get('/:phone', ghostModeMiddleware.checkGhostMode, walletController.getWalletDetails);
 router.post(
 	'/fund',
 	ghostModeMiddleware.checkGhostMode,
@@ -17,6 +18,11 @@ router.post(
 	'/transfer',
 	ghostModeMiddleware.checkGhostMode,
 	walletController.transferFunds
+);
+router.post(
+	'/phone-transfer',
+	ghostModeMiddleware.checkGhostMode,
+	walletController.sendFunds
 );
 
 // Transaction endpoints

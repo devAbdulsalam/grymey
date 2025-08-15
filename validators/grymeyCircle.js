@@ -35,17 +35,57 @@ const withdrawFromCircleSchema = Joi.object({
 });
 
 export function validateCreateCircle(data) {
-	return createCircleSchema.validate(data, { abortEarly: false });
+	const { value, error } = createCircleSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateInviteToCircle(data) {
-	return inviteToCircleSchema.validate(data, { abortEarly: false });
+	const { value, error } = inviteToCircleSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateContributeToCircle(data) {
-	return contributeToCircleSchema.validate(data, { abortEarly: false });
+	const { value, error } = contributeToCircleSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }
 
 export function validateWithdrawFromCircle(data) {
-	return withdrawFromCircleSchema.validate(data, { abortEarly: false });
+	const { value, error } = withdrawFromCircleSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
 }

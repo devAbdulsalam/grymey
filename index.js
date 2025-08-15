@@ -33,9 +33,6 @@ import errorHandler from './middleware/errorHandler.js';
 // import errorHandler from './middleware/errorHandler.js';
 import logger from './utils/logger.js';
 
-
-
-
 // setups
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -104,7 +101,6 @@ app.use('/api/v1/wecome', (req, res) => {
 	res.status(200).json({ message: 'Welcome to Grymey API' });
 });
 app.use('/api/v1/users', userRoutes);
-// app.use('/api/v1/moments', momentRoutes);
 app.use('/api/v1/wallet', walletRoutes);
 app.use('/api/v1/receive', receiveMoneyRoutes);
 app.use('/api/v1/split-payments', splitPaymentRoutes);
@@ -114,6 +110,7 @@ app.use('/api/v1/circles', grymeyCircleRoutes);
 app.use('/api/v1/cards', virtualCardRoutes);
 app.use('/api/security', securityRoutes);
 app.use('/api/bills', billRoutes);
+// app.use('/api/v1/moments', momentRoutes);
 
 // * API DOCS
 // ? Keeping swagger code at the end so that we can load swagger on "/" route
@@ -136,11 +133,13 @@ app.use(errorHandler);
 mongoose
 	.connect(process.env.MONGO_URL)
 	.then(() => {
-		app.listen(PORT, () => console.log(`Server Port: ${PORT}`)) 
+		app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 		logger.info(`Server running on port ${PORT}`);
-		logger.info(`API documentation available at http://localhost:${PORT}/api-docs`);
+		logger.info(
+			`API documentation available at http://localhost:${PORT}/api-docs`
+		);
 	})
 	.then(() => logger.info('MongoDB connected successfully'))
-	.catch(err => logger.error('MongoDB connection error:', err));
+	.catch((err) => logger.error('MongoDB connection error:', err));
 
 // app.listen(PORT, () => console.log(`Server Port: ${PORT}`));

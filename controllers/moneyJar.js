@@ -9,7 +9,7 @@ import logger from '../utils/logger.js';
 class MoneyJarController {
 	async createMoneyJar(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const jarData = validateCreateMoneyJar(req.body);
 
 			const moneyJar = await moneyJarService.createMoneyJar(userId, jarData);
@@ -33,7 +33,7 @@ class MoneyJarController {
 
 	async getMoneyJars(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 
 			const moneyJars = await moneyJarService.getMoneyJars(userId);
 
@@ -57,10 +57,25 @@ class MoneyJarController {
 			next(error);
 		}
 	}
+	async getMoneyJar(req, res, next) {
+		try {
+			const jarId = req.params.id;
+
+			const moneyJar = await moneyJarService.getMoneyJar(jarId);
+
+			res.json({
+				success: true,
+				moneyJar,
+			});
+		} catch (error) {
+			logger.error(`Get money jar error: ${error.message}`);
+			next(error);
+		}
+	}
 
 	async fundMoneyJar(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			const { amount } = validateFundMoneyJar(req.body);
 
@@ -91,7 +106,7 @@ class MoneyJarController {
 
 	async withdrawFromMoneyJar(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 			const { amount } = validateWithdrawFromMoneyJar(req.body);
 
@@ -129,7 +144,7 @@ class MoneyJarController {
 
 	async lockMoneyJar(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 
 			const moneyJar = await moneyJarService.lockMoneyJar(id, userId);
@@ -151,7 +166,7 @@ class MoneyJarController {
 
 	async unlockMoneyJar(req, res, next) {
 		try {
-			const { userId } = req.user;
+			const userId = req.user._id;
 			const { id } = req.params;
 
 			const moneyJar = await moneyJarService.unlockMoneyJar(id, userId);
