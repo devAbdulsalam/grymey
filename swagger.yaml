@@ -2476,7 +2476,7 @@ paths:
                   value:
                     data: {}
                     message: Transfer successfully
-                    success: true  
+                    success: true
   /receive/invoice:
     post:
       tags:
@@ -2557,7 +2557,7 @@ paths:
                   value:
                     data: {}
                     message: Transfer successfully
-                    success: true  
+                    success: true
   /receive/payment-link:
     post:
       tags:
@@ -2664,7 +2664,7 @@ paths:
                 expiresInDays:
                   type: string
                   example: 30
-                recipients: 
+                recipients:
                   type: array
                   items:
                     type: object
@@ -2735,7 +2735,7 @@ paths:
                   value:
                     data: {}
                     message: Transfer successfully
-                    success: true  
+                    success: true
   /receive/links:
     get:
       tags:
@@ -2855,7 +2855,7 @@ paths:
                     example: wallet fetched successfully
                   success:
                     type: boolean
-                    example: true  
+                    example: true
   /split-payments:
     get:
       tags:
@@ -3281,7 +3281,7 @@ paths:
                     example: Escrow fetched successfully
                   success:
                     type: boolean
-                    example: true    
+                    example: true
     post:
       tags:
         - 🔄 escrow
@@ -3496,7 +3496,7 @@ paths:
                     example: Escrow release successfully
                   success:
                     type: boolean
-                    example: true 
+                    example: true
   /jars:
     get:
       tags:
@@ -3553,7 +3553,7 @@ paths:
                     example: Money jar fetched successfully
                   success:
                     type: boolean
-                    example: true    
+                    example: true
     post:
       tags:
         - 🔄 moneyjar
@@ -3719,7 +3719,7 @@ paths:
         - name: jarId
           in: path
           description: ID of the jar
-          required: true 
+          required: true
       requestBody:
         content:
           application/json:
@@ -4736,7 +4736,7 @@ paths:
                   success:
                     type: boolean
                     example: true
-  
+
   # /moments:
   #   get:
   #     tags:
