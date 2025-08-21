@@ -19,6 +19,11 @@
             "date": 1755249718001,
             "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-15.log",
             "hash": "3126b2e0c95ab5740619a6bbbf54e2ca6261df361b37733eeeeeb004a3d3c31b"
+        },
+        {
+            "date": 1755780758803,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-21.log",
+            "hash": "861d5694051fa1a39d1bcd267be4881ae1405e5d00ba7411aa8319e744704367"
         }
     ],
     "hashType": "sha256"

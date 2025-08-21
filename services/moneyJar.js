@@ -56,9 +56,10 @@ class MoneyJarService {
 	}
 	async getMoneyJar(jarId) {
 		try {
-			const moneyJar = await MoneyJar.findById(jarId)
-				.populate('creatorId', 'name email')
-				.populate('payerId', 'name email');
+			const moneyJar = await MoneyJar.findById(jarId).populate(
+				'userId',
+				'name email'
+			);
 
 			return moneyJar;
 		} catch (error) {

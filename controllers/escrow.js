@@ -100,12 +100,26 @@ class EscrowController {
 			next(error);
 		}
 	}
+	async getEscrow(req, res, next) {
+		try {
+			const { id } = req.params;
+
+			const result = await escrowService.getEscrow(id);
+
+			res.json({
+				success: true,
+				...result,
+			});
+		} catch (error) {
+			logger.error(`Get escrow error: ${error.message}`);
+			next(error);
+		}
+	}
 	async getEscrows(req, res, next) {
 		try {
-			const { userId } = req.params;
 			const { page, limit, status } = validateGetUserEscrows(req.query);
 
-			const result = await escrowService.getUserEscrows(userId, {
+			const result = await escrowService.getEscrows({
 				page,
 				limit,
 				status,

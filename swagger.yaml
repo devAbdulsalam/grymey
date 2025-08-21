@@ -1953,7 +1953,7 @@ paths:
                   success:
                     type: boolean
                     example: true
-  /wallet/transactions:
+  /wallet/{phone}:
     get:
       tags:
         - 🔄 wallet
@@ -1961,6 +1961,13 @@ paths:
       description: >-
         The API endpoint retrieves user wallet transactions.
       operationId: getuserwallettransactions
+      parameters:
+        - in: path
+          name: phone
+          required: true
+          schema:
+            type: string
+            example: 90880951785
       responses:
         '200':
           description: Get transactions
@@ -2154,12 +2161,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Wallet funded successfully
-                    success: true
   /wallet/transfer:
     post:
       tags:
@@ -2229,12 +2230,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /wallet/phone-transfer:
     post:
       tags:
@@ -2304,12 +2299,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /wallet/change-pin:
     post:
       tags:
@@ -2471,12 +2460,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /receive/invoice:
     post:
       tags:
@@ -2552,12 +2535,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /receive/payment-link:
     post:
       tags:
@@ -2633,12 +2610,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /receive/split-link:
     post:
       tags:
@@ -2730,12 +2701,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /receive/links:
     get:
       tags:
@@ -2990,12 +2955,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /split-payment/user/{userId}:
     get:
       tags:
@@ -3138,12 +3097,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Payment successfully
-                    success: true
   /split-payments/{splitPaymentId}/process:
     post:
       tags:
@@ -3219,12 +3172,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Transfer successfully
-                    success: true
   /escrow:
     get:
       tags:
@@ -3305,7 +3252,7 @@ paths:
                   example: save some money for my school fees
                 expiresInDays:
                   type: string
-                  example: '2025-09-30'
+                  example: '30'
                 amount:
                   type: string
                   example: 300000
@@ -3359,20 +3306,21 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: escrow created successfully
-                    success: true
   /escrow/{escrowId}:
     get:
       tags:
-        - 🔄 moneyjar
+        - 🔄 escrow
       summary: Get escrow by id
       description: >-
         The API endpoint retrieves escrow by id by id.
       operationId: get escrow by id
+      parameters:
+        - in: path
+          name: escrowId
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
       responses:
         '200':
           description: Get escrow by id
@@ -3429,24 +3377,13 @@ paths:
       summary: release escrow
       description: The API endpoint to release escrow request
       operationId: releaseescrow
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                  example: bithday
-                description:
-                  type: string
-                  example: general bithday
-                amount:
-                  type: string
-                  example: 3000
-            example:
-              amount: 3000
-              receiverId: 9399303iueiu983iu3
+      parameters:
+        - name: escrowId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
       responses:
         '200':
           description: Release escrow
@@ -3494,6 +3431,143 @@ paths:
                   message:
                     type: string
                     example: Escrow release successfully
+                  success:
+                    type: boolean
+                    example: true
+  /escrow/{escrowId}/dispute:
+    post:
+      tags:
+        - 🔄 escrow
+      summary: dispute escrow
+      description: The API endpoint to dispute escrow request
+      operationId: disputeescrow
+      parameters:
+        - name: escrowId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: save some money for my school fees
+      responses:
+        '200':
+          description: Dispute escrow
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Dispute release successfully
+                  success:
+                    type: boolean
+                    example: true
+  /escrow/user/{userId}:
+    get:
+      tags:
+        - 🔄 escrow
+      summary: get user escrows
+      description: The API endpoint to get user escrows
+      operationId: userescrows
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      responses:
+        '200':
+          description: User escrows
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Escrow fetch successfully
                   success:
                     type: boolean
                     example: true
@@ -3645,12 +3719,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Money jar created successfully
-                    success: true
   /jars/{jarId}:
     get:
       tags:
@@ -3659,6 +3727,12 @@ paths:
       description: >-
         The API endpoint retrieves money jar by id.
       operationId: get money jar
+      parameters:
+        - name: jarId
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Get money jar
@@ -3779,12 +3853,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Money jar funded successfully
-                    success: true
   /jars/{jarId}/withdraw:
     post:
       tags:
@@ -3856,12 +3924,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Money jar withdraw successfully
-                    success: true
   /jars/{jarId}/lock:
     post:
       tags:
@@ -3924,12 +3986,6 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Money jar lock successfully
-                    success: true
   /jars/{jarId}/unlock:
     post:
       tags:
@@ -3992,12 +4048,593 @@ paths:
                   success:
                     type: boolean
                     example: true
-              examples:
-                Forgot password request:
-                  value:
-                    data: {}
-                    message: Money jar unlocked successfully
-                    success: true
+  /circles:
+    get:
+      tags:
+        - 🔄 grymeyCircle
+      summary: Get circles
+      description: >-
+        The API endpoint retrieves circles.
+      operationId: searchcircles
+      responses:
+        '200':
+          description: searchcircles
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: circles fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: create grymeycircle
+      description: create grymeycircle.
+      operationId: creategrymeycircle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: stemlab
+                description:
+                  type: string
+                  example: save some money for my school fees
+                frequency:
+                  type: string
+                  example: 'weekly'
+                targetAmount:
+                  type: string
+                  example: 300000
+                contributionAmount:
+                  type: string
+                  example: 30000
+                withdrawalRules:
+                  type: object
+                  properties:
+                    requiresApproval:
+                      type: boolean
+                      example: true
+                    minApprovals:
+                      type: number
+                      example: 10
+                    allowedMembers:
+                      type: array
+                      items:
+                        type: string
+                        example: 63c7e1e3e6b7f0b7b7b7b7b7
+                members:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      userId:
+                        type: string
+                        example: 63c7e1e3e6b7f0b7b7b7b7b7
+                      role:
+                        type: string
+                        example: 'member'
+
+      responses:
+        '200':
+          description: create grymeycircle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: circle created successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/{circleId}:
+    get:
+      tags:
+        - 🔄 grymeyCircle
+      summary: Get circle
+      description: >-
+        The API endpoint retrieves circle details.
+      operationId: getcircle
+      parameters:
+        - name: circleId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: get circle details
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: circles fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/user:
+    get:
+      tags:
+        - 🔄 grymeyCircle
+      summary: Get user circles
+      description: >-
+        The API endpoint retrieves user circles.
+      operationId: getusercircles
+      responses:
+        '200':
+          description: getusercircles
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: user circles fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/{circleId}/invite:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: invite to circle
+      description: invite to circle.
+      operationId: invite to circle
+      parameters:
+        - name: circleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+      responses:
+        '200':
+          description: invite to circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: user invited successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/{circleId}/join:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: join to circle
+      description: join to circle.
+      operationId: join to circle
+      parameters:
+        - name: circleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                receiverId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+                description:
+                  type: string
+                  example: save some money for my school fees
+                conditions:
+                  type: string
+                  example: save some money for my school fees
+                expiresInDays:
+                  type: string
+                  example: '30'
+                amount:
+                  type: string
+                  example: 300000
+      responses:
+        '200':
+          description: invite to circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: escrow created successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/{circleId}/contribute:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: contribute to circle
+      description: contribute to circle.
+      operationId: contribute to circle
+      parameters:
+        - name: circleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 300000
+      responses:
+        '200':
+          description: contribute to circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: contribute successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/{circleId}/withdraw:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: withdraw from circle
+      description: withdraw from circle.
+      operationId: withdraw money from circle
+      parameters:
+        - name: circleId
+          in: path
+          required: true
+          schema:
+            type: string
+            example: 689e5adc3e9ad666db548b6a
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: save some money for my school fees
+                amount:
+                  type: string
+                  example: 300000
+      responses:
+        '200':
+          description: withdraw from circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: money withdraw successfully
+                  success:
+                    type: boolean
+                    example: true
   /services:
     get:
       tags:
@@ -4679,63 +5316,6 @@ paths:
                 data:
                   type: object
                 example: {}
-  /circles/search:
-    get:
-      tags:
-        - 🔄 wallet
-      summary: Get circles
-      description: >-
-        The API endpoint retrieves circles.
-      operationId: searchcircles
-      responses:
-        '200':
-          description: searchcircles
-          headers:
-            Access-Control-Allow-Credentials:
-              schema:
-                type: string
-                example: 'true'
-            Access-Control-Allow-Origin:
-              schema:
-                type: string
-                example: '*'
-            Connection:
-              schema:
-                type: string
-                example: keep-alive
-            Content-Length:
-              schema:
-                type: string
-                example: '1126'
-            Date:
-              schema:
-                type: string
-                example: Thu, 01 Jun 2023 05:44:27 GMT
-            ETag:
-              schema:
-                type: string
-                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
-            Keep-Alive:
-              schema:
-                type: string
-                example: timeout=5
-            X-Powered-By:
-              schema:
-                type: string
-                example: Express
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: object
-                  message:
-                    type: string
-                    example: circles fetched successfully
-                  success:
-                    type: boolean
-                    example: true
 
   # /moments:
   #   get:

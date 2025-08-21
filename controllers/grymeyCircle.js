@@ -4,6 +4,7 @@ import {
 	validateInviteToCircle,
 	validateContributeToCircle,
 	validateWithdrawFromCircle,
+	validateGetCircles,
 } from '../validators/grymeyCircle.js';
 import logger from '../utils/logger.js';
 
@@ -18,7 +19,7 @@ class GrymeyCircleController {
 			res.status(201).json({
 				success: true,
 				circle: {
-					id: circle._id,
+					_id: circle._id,
 					name: circle.name,
 					description: circle.description,
 					totalBalance: circle.totalBalance,
@@ -42,7 +43,7 @@ class GrymeyCircleController {
 			res.json({
 				success: true,
 				circles: circles.map((circle) => ({
-					id: circle._id,
+					_id: circle._id,
 					name: circle.name,
 					description: circle.description,
 					totalBalance: circle.totalBalance,
@@ -57,10 +58,44 @@ class GrymeyCircleController {
 			next(error);
 		}
 	}
+	async getCircles(req, res, next) {
+		try {
+			const { page, limit, status } = validateGetCircles(req.query);
+
+			const result = await grymeyCircleService.getCircles({
+				page,
+				limit,
+				status,
+			});
+
+			res.json({
+				success: true,
+				...result,
+			});
+		} catch (error) {
+			logger.error(`Get user circles error: ${error.message}`);
+			next(error);
+		}
+	}
+	async getCircle(req, res, next) {
+		try {
+			const circleId = req.params.id;
+
+			const circle = await grymeyCircleService.getCircle(circleId);
+
+			res.json({
+				success: true,
+				circle,
+			});
+		} catch (error) {
+			logger.error(`Get circle error: ${error.message}`);
+			next(error);
+		}
+	}
 
 	async inviteToCircle(req, res, next) {
 		try {
-			const { userId: inviterId } = req.user;
+			const inviterId = req.user._id;
 			const { id: circleId } = req.params;
 			const { userId } = validateInviteToCircle(req.body);
 
@@ -74,9 +109,30 @@ class GrymeyCircleController {
 				success: true,
 				message: 'User invited to circle successfully',
 				circle: {
-					id: circle._id,
+					_id: circle._id,
 					name: circle.name,
-					memberCount: circle.members.length,
+					memberCount: circle?.members?.length,
+				},
+			});
+		} catch (error) {
+			logger.error(`Invite to circle error: ${error.message}`);
+			next(error);
+		}
+	}
+	async approveWithdrawal(req, res, next) {
+		try {
+			const userId = req.user._id;
+			const  circleId  = req.params.id;
+
+			const circle = await grymeyCircleService.approveWithdrawal(circleId, userId);
+
+			res.json({
+				success: true,
+				message: 'User invited to circle successfully',
+				circle: {
+					_id: circle._id,
+					name: circle.name,
+					memberCount: circle?.members?.length,
 				},
 			});
 		} catch (error) {
@@ -98,7 +154,7 @@ class GrymeyCircleController {
 				success: true,
 				message: 'Contribution successful',
 				circle: {
-					id: circle._id,
+					_id: circle._id,
 					name: circle.name,
 					totalBalance: circle.totalBalance,
 				},
@@ -130,7 +186,7 @@ class GrymeyCircleController {
 				success: true,
 				message: result.message,
 				circle: {
-					id: result.circle._id,
+					_id: result.circle._id,
 					name: result.circle.name,
 					totalBalance: result.circle.totalBalance,
 				},
@@ -139,7 +195,7 @@ class GrymeyCircleController {
 
 			if (!result.requiresApproval) {
 				response.transaction = {
-					id: result.transaction._id,
+					_id: result.transaction._id,
 					reference: result.transaction.reference,
 					amount: result.transaction.amount,
 				};

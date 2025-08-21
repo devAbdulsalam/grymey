@@ -1,3 +1,27 @@
 2025-08-03 20:51:23 error: 	unhandledRejection: logger is not defined
 ReferenceError: logger is not defined
     at file:///Users/macbookpro/Desktop/projects/grymey/index.js:141:23
+2025-08-21 15:51:13 error: 	unhandledRejection: Cannot populate path `creatorId` because it is not in your schema. Set the `strictPopulate` option to false to override.
+StrictPopulateError: Cannot populate path `creatorId` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:50:12)
+    at _populatePath (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/model.js:4469:21)
+    at Function.populate (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/model.js:4436:21)
+    at /Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:2631:11
+    at _init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:3307:5)
+    at Document.init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/document.js:654:5)
+    at Document.$init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/document.js:667:42)
+    at Object.createModelAndInit (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/queryHelpers.js:119:12)
+    at completeOne (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:3285:11)
+    at Query._completeOne (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:2627:3)
+2025-08-21 15:52:10 error: 	unhandledRejection: Cannot populate path `creatorId` because it is not in your schema. Set the `strictPopulate` option to false to override.
+StrictPopulateError: Cannot populate path `creatorId` because it is not in your schema. Set the `strictPopulate` option to false to override.
+    at getModelsMapForPopulate (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:50:12)
+    at _populatePath (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/model.js:4469:21)
+    at Function.populate (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/model.js:4436:21)
+    at /Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:2631:11
+    at _init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:3307:5)
+    at Document.init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/document.js:654:5)
+    at Document.$init (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/document.js:667:42)
+    at Object.createModelAndInit (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/queryHelpers.js:119:12)
+    at completeOne (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:3285:11)
+    at Query._completeOne (/Users/macbookpro/Desktop/projects/grymey/node_modules/mongoose/lib/query.js:2627:3)

@@ -19,6 +19,7 @@ class WalletController {
 			// Sanitize response - don't send full ledger unless needed
 			const response = {
 				_id: wallet._id,
+				userId,
 				balance: wallet.balance,
 				currency: wallet.currency,
 				lastTransactions: wallet.ledger.slice(0, 5),

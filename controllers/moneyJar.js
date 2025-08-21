@@ -61,7 +61,8 @@ class MoneyJarController {
 		try {
 			const jarId = req.params.id;
 
-			const moneyJar = await moneyJarService.getMoneyJar(jarId);
+			const moneyJar = await moneyJarService
+				.getMoneyJar(jarId)
 
 			res.json({
 				success: true,

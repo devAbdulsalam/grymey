@@ -17,6 +17,8 @@ const transactionSchema = new Schema({
 			'jar_funding',
 			'penalty',
 			'jar_withdrawal',
+			'circle_contribution',
+			'circle_withdrawal',
 		],
 		required: true,
 	},

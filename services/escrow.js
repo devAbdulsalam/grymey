@@ -23,6 +23,13 @@ class EscrowService {
 			if (senderWallet.balance < escrowData.amount) {
 				throw new Error('Insufficient balance');
 			}
+			// Get receiver wallet (create if doesn't exist)
+			let receiverWallet = await Wallet.findOne({
+				userId: escrowData.receiverId,
+			}).session(session);
+			if (!receiverWallet) {
+				throw new Error('Receiver wallet not found');
+			}
 
 			// Create escrow record
 			const reference = generateReference('ESC');
@@ -38,21 +45,10 @@ class EscrowService {
 
 			await escrow.save({ session });
 
-			// Deduct from sender's wallet
-			senderWallet.balance -= escrowData.amount;
-			senderWallet.ledger.push({
-				transactionId: null, // Will be updated after transaction creation
-				amount: -escrowData.amount,
-				balanceBefore: senderWallet.balance + escrowData.amount,
-				balanceAfter: senderWallet.balance,
-				type: 'debit',
-			});
-			await senderWallet.save({ session });
-
 			// Create transaction record
 			const transaction = new Transaction({
 				senderId: userId,
-				receiverId: null, // Held in escrow
+				receiverId: escrowData.receiverId,
 				amount: escrowData.amount,
 				type: 'escrow',
 				status: 'pending',
@@ -64,14 +60,20 @@ class EscrowService {
 			});
 
 			await transaction.save({ session });
+			// Deduct from sender's wallet
+			senderWallet.balance -= escrowData.amount;
+			senderWallet.ledger.push({
+				transactionId: transaction._id,
+				amount: -escrowData.amount,
+				balanceBefore: senderWallet.balance + escrowData.amount,
+				balanceAfter: senderWallet.balance,
+				type: 'debit',
+			});
+			await senderWallet.save({ session });
 
-			// Update escrow with transaction ID
 			escrow.transactionId = transaction._id;
 			await escrow.save({ session });
 
-			// Update wallet ledger with transaction ID
-			senderWallet.ledger[senderWallet.ledger.length - 1].transactionId =
-				transaction._id;
 			await senderWallet.save({ session });
 
 			await session.commitTransaction();
@@ -113,15 +115,15 @@ class EscrowService {
 				throw new Error(`Escrow is already ${escrow.status}`);
 			}
 
+			// console.log('escrow transactionId', escrow.transactionId);
 			// Get receiver wallet (create if doesn't exist)
 			let receiverWallet = await Wallet.findOne({
 				userId: escrow.receiverId,
 			}).session(session);
 			if (!receiverWallet) {
-				receiverWallet = new Wallet({ userId: escrow.receiverId });
-				await receiverWallet.save({ session });
+				throw new Error('Receiver wallet not found!');
 			}
-
+			// console.log(receiverWallet);
 			// Credit receiver's wallet
 			receiverWallet.balance += escrow.amount;
 			receiverWallet.ledger.push({
@@ -162,6 +164,21 @@ class EscrowService {
 		}
 	}
 
+	async getEscrow(escrowId) {
+		try {
+			const escrow = await Escrow.findById(escrowId);
+			if (!escrow) {
+				throw new Error('Escrow not found');
+			}
+			// console.log(escrow);
+			return escrow?._doc;
+		} catch (error) {
+			logger.error(
+				`Error getting escrow with id ${escrowId}: ${error.message}`
+			);
+			throw error;
+		}
+	}
 	async raiseDispute(escrowId, userId, reason) {
 		const session = await mongoose.startSession();
 		session.startTransaction();
@@ -214,7 +231,7 @@ class EscrowService {
 	async getUserEscrows(userId, { page = 1, limit = 10, status }) {
 		try {
 			const query = {
-				$or: [{ creatorId: userId }, { payerId: userId }],
+				$or: [{ senderId: userId }, { receiverId: userId }],
 				...(status && { status }),
 			};
 
@@ -225,9 +242,8 @@ class EscrowService {
 					.sort({ createdAt: -1 })
 					.skip(skip)
 					.limit(limit)
-					.populate('creatorId', 'name email')
-					.populate('payerId', 'name email')
-					.populate('recipients.userId', 'name email')
+					.populate('senderId', 'name email')
+					.populate('receiverId', 'name email')
 					.lean(),
 				Escrow.countDocuments(query),
 			]);
@@ -263,9 +279,8 @@ class EscrowService {
 					.sort({ createdAt: -1 })
 					.skip(skip)
 					.limit(limit)
-					.populate('creatorId', 'name email')
-					.populate('payerId', 'name email')
-					.populate('recipients.userId', 'name email')
+					.populate('senderId', 'name email')
+					.populate('receiverId', 'name email')
 					.lean(),
 				Escrow.countDocuments(query),
 			]);
@@ -282,8 +297,8 @@ class EscrowService {
 				},
 			};
 		} catch (error) {
-			logger.error(`Error getting split payments: ${error.message}`);
-			throw new Error('Failed to retrieve split payments');
+			logger.error(`Error getting split escrows: ${error.message}`);
+			throw new Error('Failed to retrieve split escrows');
 		}
 	}
 
