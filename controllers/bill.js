@@ -9,7 +9,7 @@ class BillController {
 	async getBillProviders(req, res, next) {
 		try {
 			const providers = await billService.getBillProviders();
-
+			console.log(providers);
 			res.json({
 				success: true,
 				providers,

@@ -24,6 +24,16 @@
             "date": 1755780758803,
             "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-21.log",
             "hash": "861d5694051fa1a39d1bcd267be4881ae1405e5d00ba7411aa8319e744704367"
+        },
+        {
+            "date": 1755852948875,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-22.log",
+            "hash": "35b42848d0bb129a9ccc1bad187a0c84af7da1a4f5a76344a9732e4130373243"
+        },
+        {
+            "date": 1755948392012,
+            "name": "/Users/macbookpro/Desktop/projects/grymey/logs/combined-2025-08-23.log",
+            "hash": "a2e3b9b21f461833e9a27f8148fedb20c0c58d34f4feebbd8b53dcf48e7e5939"
         }
     ],
     "hashType": "sha256"

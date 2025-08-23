@@ -15,5 +15,6 @@ router.post('/:id/invite', grymeyCircleController.inviteToCircle);
 // router.post('/:id/join', grymeyCircleController.inviteToCircle);
 router.post('/:id/contribute', grymeyCircleController.contributeToCircle);
 router.post('/:id/withdraw', grymeyCircleController.withdrawFromCircle);
+router.post('/approve-withdraw', grymeyCircleController.approveWithdrawal);
 
 export default router;

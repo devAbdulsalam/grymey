@@ -139,18 +139,29 @@ class BillService {
 			if (providerId) query.providerId = providerId;
 			if (status) query.status = status;
 
-			const options = {
-				page,
-				limit,
-				sort: { createdAt: -1 },
-				populate: {
-					path: 'providerId',
-					select: 'name category logoUrl',
+			const skip = (page - 1) * limit;
+
+			const [result, total] = await Promise.all([
+				BillPayment.find(query)
+					.sort({ createdAt: -1 })
+					.skip(skip)
+					.limit(limit)
+					.populate('providerId', 'name category logoUrl')
+					.lean(),
+				BillPayment.countDocuments(query),
+			]);
+
+			return {
+				data: result,
+				pagination: {
+					total,
+					limit,
+					page,
+					pages: Math.ceil(total / limit),
+					hasNext: page * limit < total,
+					hasPrev: page > 1,
 				},
 			};
-
-			const result = await BillPayment.paginate(query, options);
-			return result;
 		} catch (error) {
 			logger.error(
 				`Error getting bill history for user ${userId}: ${error.message}`

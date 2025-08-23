@@ -710,3 +710,25 @@ TypeError: argument handler must be a function
     at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+2025-08-23 15:12:08 error: 	uncaughtException: Map keys must be unique at line 3253, column 3:
+
+  
+  /ghost/transfer:
+  ^
+
+YAMLParseError: Map keys must be unique at line 3253, column 3:
+
+  
+  /ghost/transfer:
+  ^
+
+    at Composer.onError (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/composer.js:70:34)
+    at Object.resolveBlockMap (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/resolve-block-map.js:64:13)
+    at resolveCollection (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-collection.js:13:27)
+    at Object.composeCollection (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-collection.js:59:16)
+    at composeNode (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-node.js:33:38)
+    at Object.resolveBlockMap (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/resolve-block-map.js:85:19)
+    at resolveCollection (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-collection.js:13:27)
+    at Object.composeCollection (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-collection.js:59:16)
+    at Object.composeNode (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-node.js:33:38)
+    at Object.composeDoc (/Users/macbookpro/Desktop/projects/grymey/node_modules/yaml/dist/compose/compose-doc.js:35:23)

@@ -1,0 +1,38 @@
+2025-08-22 09:55:55 info: 	Server running on port 9000
+2025-08-22 09:55:55 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 09:55:55 info: 	MongoDB connected successfully
+2025-08-22 09:57:22 error: 	Error withdrawing from circle 689e5adc3e9ad666db548b6a: Circle not found
+2025-08-22 09:57:22 error: 	Withdraw from circle error: Circle not found
+2025-08-22 10:03:37 info: 	Server running on port 9000
+2025-08-22 10:03:37 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:03:37 info: 	MongoDB connected successfully
+2025-08-22 10:04:14 info: 	Server running on port 9000
+2025-08-22 10:04:14 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:04:14 info: 	MongoDB connected successfully
+2025-08-22 10:33:07 info: 	Server running on port 9000
+2025-08-22 10:33:07 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:33:07 info: 	MongoDB connected successfully
+2025-08-22 10:33:49 info: 	Server running on port 9000
+2025-08-22 10:33:49 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:33:49 info: 	MongoDB connected successfully
+2025-08-22 10:35:12 info: 	Server running on port 9000
+2025-08-22 10:35:12 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:35:12 info: 	MongoDB connected successfully
+2025-08-22 10:35:48 info: 	Server running on port 9000
+2025-08-22 10:35:48 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 10:35:48 info: 	MongoDB connected successfully
+2025-08-22 13:09:25 info: 	Server running on port 9000
+2025-08-22 13:09:25 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 13:09:25 info: 	MongoDB connected successfully
+2025-08-22 13:09:43 info: 	Server running on port 9000
+2025-08-22 13:09:43 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 13:09:43 info: 	MongoDB connected successfully
+2025-08-22 13:09:57 info: 	Server running on port 9000
+2025-08-22 13:09:57 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 13:09:57 info: 	MongoDB connected successfully
+2025-08-22 13:10:20 info: 	Server running on port 9000
+2025-08-22 13:10:20 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 13:10:20 info: 	MongoDB connected successfully
+2025-08-22 13:10:40 info: 	Server running on port 9000
+2025-08-22 13:10:40 info: 	API documentation available at http://localhost:9000/api-docs
+2025-08-22 13:10:40 info: 	MongoDB connected successfully

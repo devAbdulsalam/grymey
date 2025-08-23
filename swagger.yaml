@@ -1899,7 +1899,7 @@ paths:
   /wallet:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get wallet
       description: >-
         The API endpoint retrieves user wallet.
@@ -1956,7 +1956,7 @@ paths:
   /wallet/{phone}:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get wallet transactions
       description: >-
         The API endpoint retrieves user wallet transactions.
@@ -2020,7 +2020,7 @@ paths:
   /wallet/transactions/search:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get wallet transactions search
       description: >-
         The API endpoint retrieves search user wallet transactions.
@@ -2098,7 +2098,7 @@ paths:
   /wallet/fund:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Fund wallet
       description: The API endpoint to fund wallet request
       operationId: fund wallet request
@@ -2164,7 +2164,7 @@ paths:
   /wallet/transfer:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Transfer Fund
       description: The API endpoint to transfer fund from wallet request
       operationId: transfer fund request
@@ -2233,7 +2233,7 @@ paths:
   /wallet/phone-transfer:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Transfer Fund to phone
       description: The API endpoint to transfer fund from wallet request
       operationId: transfer fund request to phone
@@ -2302,7 +2302,7 @@ paths:
   /wallet/change-pin:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Change current Pin
       description: >-
         The Change Pin API allows logged-in users to update their account
@@ -2388,7 +2388,7 @@ paths:
   /receive/crowdfunding:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Receive crowdfunding Fund
       description: The API endpoint to receive crowd funding to wallet request
       operationId: receive crowd funding to request
@@ -2463,7 +2463,7 @@ paths:
   /receive/invoice:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Create payment invoice
       description: The API endpoint to create payment invoice
       operationId: create payment invoice
@@ -2538,7 +2538,7 @@ paths:
   /receive/payment-link:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Create payment invoice link
       description: The API endpoint to create payment invoice link
       operationId: create payment invoice link
@@ -2613,7 +2613,7 @@ paths:
   /receive/split-link:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Create split payment link
       description: The API endpoint to create split payment invoice
       operationId: create split payment invoice
@@ -2704,7 +2704,7 @@ paths:
   /receive/links:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get invoice links
       description: >-
         The API endpoint retrieves user invoices links.
@@ -2761,7 +2761,7 @@ paths:
   /receive/links/{linkId}:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get invoice link
       description: >-
         The API endpoint retrieves user invoices link.
@@ -2824,7 +2824,7 @@ paths:
   /split-payments:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get split-payments
       description: >-
         The API endpoint retrieves user split-payments.
@@ -2880,7 +2880,7 @@ paths:
                     example: true
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Create split-payments
       description: The API endpoint to create split-payments
       operationId: create split-payments request
@@ -2958,7 +2958,7 @@ paths:
   /split-payment/user/{userId}:
     get:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Get user split-payments
       description: >-
         The API endpoint retrieves user split payments.
@@ -3022,7 +3022,7 @@ paths:
   /split-payments/{splitPaymentId}:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: Pay split-payments
       description: The API endpoint to pay a split-payments
       operationId: pay a split-payments request
@@ -3100,7 +3100,7 @@ paths:
   /split-payments/{splitPaymentId}/process:
     post:
       tags:
-        - 🔄 wallet
+        - 🗃️ wallet
       summary: process split-payments
       description: The API endpoint to process split-payments request
       operationId: processsplit-paymentsrequest
@@ -3172,10 +3172,235 @@ paths:
                   success:
                     type: boolean
                     example: true
+  /security/ghost-transfer:
+    post:
+      tags:
+        - 👻 ghost transfer
+      summary: process ghost transfer
+      description: The API endpoint to process ghost transfer request
+      operationId: processghost transferrequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: bithday
+                description:
+                  type: string
+                  example: general bithday
+                amount:
+                  type: string
+                  example: 3000
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
+      responses:
+        '200':
+          description: Process ghost transfer
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+  /security/report-fraud:
+    post:
+      tags:
+        - 👻 ghost report-fraud
+      summary: process report-fraud transfer
+      description: The API endpoint to process report-fraud transfer request
+      operationId: process report-fraud transferrequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: bithday
+                description:
+                  type: string
+                  example: general bithday
+                amount:
+                  type: string
+                  example: 3000
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
+      responses:
+        '200':
+          description: Process report-fraud
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer successfully
+                  success:
+                    type: boolean
+                    example: true
+  /security/verify-transfer:
+    post:
+      tags:
+        - 👻 verify-transfer
+      summary: process verify transfer
+      description: The API endpoint to verify transfer request
+      operationId: verify transferrequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: bithday
+                description:
+                  type: string
+                  example: general bithday
+                amount:
+                  type: string
+                  example: 3000
+            example:
+              amount: 3000
+              receiverId: 9399303iueiu983iu3
+      responses:
+        '200':
+          description: Verify transfer
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Transfer verified successfully
+                  success:
+                    type: boolean
+                    example: true
   /escrow:
     get:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: Get escrow
       description: >-
         The API endpoint retrieves all escrow.
@@ -3231,7 +3456,7 @@ paths:
                     example: true
     post:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: create escrow
       description: create escrow.
       operationId: createescrow
@@ -3309,7 +3534,7 @@ paths:
   /escrow/{escrowId}:
     get:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: Get escrow by id
       description: >-
         The API endpoint retrieves escrow by id by id.
@@ -3373,7 +3598,7 @@ paths:
   /escrow/{escrowId}/release:
     post:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: release escrow
       description: The API endpoint to release escrow request
       operationId: releaseescrow
@@ -3437,7 +3662,7 @@ paths:
   /escrow/{escrowId}/dispute:
     post:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: dispute escrow
       description: The API endpoint to dispute escrow request
       operationId: disputeescrow
@@ -3510,7 +3735,7 @@ paths:
   /escrow/user/{userId}:
     get:
       tags:
-        - 🔄 escrow
+        - 🙆‍♂️ escrow
       summary: get user escrows
       description: The API endpoint to get user escrows
       operationId: userescrows
@@ -3574,7 +3799,7 @@ paths:
   /jars:
     get:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: Get money jar
       description: >-
         The API endpoint retrieves all  money jar.
@@ -3630,7 +3855,7 @@ paths:
                     example: true
     post:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: create money jar
       description: create money jar.
       operationId: createmoneyjar
@@ -3722,7 +3947,7 @@ paths:
   /jars/{jarId}:
     get:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: Get money jar
       description: >-
         The API endpoint retrieves money jar by id.
@@ -3785,7 +4010,7 @@ paths:
   /jars/{jarId}/fund:
     post:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: fund money jar
       description: fund money jar.
       operationId: fundmoneyjar
@@ -3856,7 +4081,7 @@ paths:
   /jars/{jarId}/withdraw:
     post:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: withdraw money from jar
       description: withdraw money from jar.
       operationId: withdrawmoneyjar
@@ -3927,7 +4152,7 @@ paths:
   /jars/{jarId}/lock:
     post:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: lock money jar
       description: lock money jar.
       operationId: lockmoneyjar
@@ -3989,7 +4214,7 @@ paths:
   /jars/{jarId}/unlock:
     post:
       tags:
-        - 🔄 moneyjar
+        - 💰 moneyjar
       summary: unlock money jar
       description: unlock money jar.
       operationId: unlockmoneyjar
@@ -4635,10 +4860,330 @@ paths:
                   success:
                     type: boolean
                     example: true
+  /circles/approve-withdrawal:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: approve withdrawal from circle
+      description: approve withdrawal from circle.
+      operationId: approve withdrawal money from circle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                withdrawalId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+                circleId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+      responses:
+        '200':
+          description: approve withdrawal from circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: approve withdrawal successfully
+                  success:
+                    type: boolean
+                    example: true
+  /circles/reject-withdrawal:
+    post:
+      tags:
+        - 🔄 grymeyCircle
+      summary: reject withdrawal from circle
+      description: reject withdrawal from circle.
+      operationId: reject withdrawal money from circle
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reason:
+                  type: string
+                  example: save some money for my school fees
+                withdrawalId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+                circleId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+      responses:
+        '200':
+          description: reject withdrawal from circle.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: Withdrawal rejected successfully
+                  success:
+                    type: boolean
+                    example: true
+  /bills/providers:
+    get:
+      tags:
+        - 👨‍💼 bills
+      summary: Get bills providers
+      description: >-
+        The API endpoint retrieves a list of bill providers.
+      responses:
+        '200':
+          description: getbills providers
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '1126'
+            Date:
+              schema:
+                type: string
+                example: Thu, 01 Jun 2023 05:44:27 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"466-tNv1SNtB6cuxJH2yZW7lrDnlA34"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                  message:
+                    type: string
+                    example: user circles fetched successfully
+                  success:
+                    type: boolean
+                    example: true
+  /bills/history:
+    get:
+      tags:
+        - 👨‍💼 bills
+      summary: Get bills history
+      description: >-
+        The API endpoint retrieves a list of bill history.
+      responses:
+      '200':
+        description: Get bills history
+        headers:
+          Access-Control-Allow-Credentials:
+            schema:
+              type: string
+              example: 'true'
+          Access-Control-Allow-Origin:
+            schema:
+              type: string
+              example: '*'
+          Connection:
+            schema:
+              type: string
+              example: keep-alive
+          Content-Length:
+            schema:
+              type: string
+              example: '10757'
+          Date:
+            schema:
+              type: string
+              example: Thu, 01 Jun 2023 05:44:13 GMT
+          ETag:
+            schema:
+              type: string
+              example: W/"2a05-xjkqHU4sNAeFPZX9uGNel7XPn8E"
+          Keep-Alive:
+            schema:
+              type: string
+              example: timeout=5
+          X-Powered-By:
+            schema:
+              type: string
+              example: Express
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                example: {}
+  /bills/pay:
+    post:
+      tags:
+        - 👨‍💼 bills
+      summary: pay bills
+      description: pay bills
+      operationId: pay bills
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: string
+                  example: 30000
+                providerId:
+                  type: string
+                  example: 689e5adc3e9ad666db548b6a
+                customerReference:
+                  type: string
+                  example: oytryuiopiuo
+      responses:
+        '200':
+          description: pay bills.
+          headers:
+            Access-Control-Allow-Credentials:
+              schema:
+                type: string
+                example: 'true'
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: '*'
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Content-Length:
+              schema:
+                type: string
+                example: '105'
+            Date:
+              schema:
+                type: string
+                example: Wed, 31 May 2023 19:56:15 GMT
+            ETag:
+              schema:
+                type: string
+                example: W/"69-7OD21C6OqsuAipwphfFVCzbFDQc"
+            Keep-Alive:
+              schema:
+                type: string
+                example: timeout=5
+            X-Powered-By:
+              schema:
+                type: string
+                example: Express
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties: {}
+                  message:
+                    type: string
+                    example: pay bills successfull
+                  success:
+                    type: boolean
+                    example: true
   /services:
     get:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Get services balance
       description: >-
         The API endpoint retrieves user service balance.
@@ -4689,7 +5234,7 @@ paths:
   /services/cables:
     get:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Get cable services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -4740,7 +5285,7 @@ paths:
   /services/banks:
     get:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Get banks
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -4791,7 +5336,7 @@ paths:
   /services/networks:
     get:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Get net services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -4842,7 +5387,7 @@ paths:
   /services/verify-phone:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Verify Phone
       description: >-
         Verify phone
@@ -4905,7 +5450,7 @@ paths:
   /services/buy-airtime:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Buy data
       description: >-
         Buy data
@@ -4976,7 +5521,7 @@ paths:
   /services/buy-data:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Buy data
       description: >-
         Buy data
@@ -5047,7 +5592,7 @@ paths:
   /services/purchase-bill:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Purchase bill
       description: >-
         Purchase bill
@@ -5118,7 +5663,7 @@ paths:
   /services/verify-bvn:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Verify BVN
       description: >-
         Verify bvn
@@ -5193,7 +5738,7 @@ paths:
   /services/verify-nin:
     post:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Verify NIN
       description: >-
         Verify nin
@@ -5268,7 +5813,7 @@ paths:
   /services/bettings:
     get:
       tags:
-        - 👨‍💼 Services
+        - 🧘‍♀️ Services
       summary: Get betting services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -6397,6 +6942,6 @@ paths:
     - name: 🔄 General
       description: >-
         This section encompasses all other APIs.
-    - name: 👨‍💼 Services
+    - name: 🧘‍♀️ Services
       description: >-
         This section encompasses all other APIs related to payment, airtime, data, etc.

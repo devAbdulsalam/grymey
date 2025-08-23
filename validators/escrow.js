@@ -13,7 +13,6 @@ const releaseEscrowSchema = Joi.object({}).unknown(false); // No body expected
 const raiseDisputeSchema = Joi.object({
 	reason: Joi.string().trim().min(10).max(500).required(),
 });
-
 const getUserEscrowsSchema = Joi.object({
 	page: Joi.number().integer().min(1).default(1),
 	limit: Joi.number().integer().min(1).max(100).default(10),

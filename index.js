@@ -108,8 +108,8 @@ app.use('/api/v1/jars', moneyJarRoutes);
 app.use('/api/v1/escrow', escrowRoutes);
 app.use('/api/v1/circles', grymeyCircleRoutes);
 app.use('/api/v1/cards', virtualCardRoutes);
-app.use('/api/security', securityRoutes);
-app.use('/api/bills', billRoutes);
+app.use('/api/v1/bills', billRoutes);
+app.use('/api/v1/security', securityRoutes);
 // app.use('/api/v1/moments', momentRoutes);
 
 // * API DOCS

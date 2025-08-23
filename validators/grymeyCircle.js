@@ -21,6 +21,15 @@ const createCircleSchema = Joi.object({
 	withdrawalRules: withdrawalRuleSchema.optional(),
 });
 
+const approveWithdrawalSchema = Joi.object({
+	withdrawalId: Joi.string().hex().length(24).required(),
+	circleId: Joi.string().hex().length(24).required(),
+});
+const rejectWithdrawalSchema = Joi.object({
+	withdrawalId: Joi.string().hex().length(24).required(),
+	circleId: Joi.string().hex().length(24).required(),
+	reason: Joi.string().trim().min(10).max(500).required()
+});
 const inviteToCircleSchema = Joi.object({
 	userId: Joi.string().hex().length(24).required(),
 });
@@ -98,6 +107,33 @@ export function validateWithdrawFromCircle(data) {
 
 export function validateGetCircles(data) {
 	const { value, error } = getCyclesSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
+}
+
+export function validateRejectWithdrawal(data) {
+	const { value, error } = rejectWithdrawalSchema.validate(data, {
+		abortEarly: false,
+		stripUnknown: true,
+		allowUnknown: false,
+	});
+
+	if (error) {
+		throw new Error(error.details.map((detail) => detail.message).join(', '));
+	}
+
+	return value; // This will return { amount: validatedAmount }
+}
+export function validateApproveWithdrawal(data) {
+	const { value, error } = approveWithdrawalSchema.validate(data, {
 		abortEarly: false,
 		stripUnknown: true,
 		allowUnknown: false,

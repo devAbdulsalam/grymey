@@ -1,15 +1,12 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
-const contributionSchema = new Schema(
-	{
-		userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-		amount: { type: Number, required: true, min: 0 },
-		date: { type: Date, default: Date.now },
-		transactionId: { type: Schema.Types.ObjectId, ref: 'Transaction' },
-	},
-	{ _id: false }
-);
+const contributionSchema = new Schema({
+	userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+	amount: { type: Number, required: true, min: 0 },
+	date: { type: Date, default: Date.now },
+	transactionId: { type: Schema.Types.ObjectId, ref: 'Transaction' },
+});
 
 const memberSchema = new Schema(
 	{
@@ -32,16 +29,35 @@ const withdrawalSchema = new Schema(
 		reason: { type: String },
 		status: {
 			type: String,
-			enum: ['pending', 'approved', 'rejected'],
+			enum: ['pending', 'approved', 'rejected', 'cancelled'],
 			default: 'pending',
 		},
 		transactionId: { type: Schema.Types.ObjectId, ref: 'Transaction' },
-		approvedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+		approvedBy: [
+			{
+				userId: { type: Schema.Types.ObjectId, ref: 'User' },
+				approvedOn: { type: Date },
+			},
+		],
+		rejectedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+		rejectionReason: { type: String },
+		rejectedAt: { type: Date },
+		history: [
+			{
+				action: {
+					type: String,
+					enum: ['requested', 'approved', 'rejected', 'cancelled'],
+				},
+				by: { type: Schema.Types.ObjectId, ref: 'User' },
+				reason: { type: String },
+				timestamp: { type: Date, default: Date.now },
+			},
+		],
 		date: { type: Date, default: Date.now },
 		processedAt: { type: Date },
 	},
-	{ _id: false }
-);
+	{ _id: true }
+); // Ensure _id is enabled for subdocuments
 
 const grymeyCircleSchema = new Schema({
 	name: { type: String, required: true },

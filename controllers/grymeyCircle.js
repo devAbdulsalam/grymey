@@ -121,22 +121,49 @@ class GrymeyCircleController {
 	}
 	async approveWithdrawal(req, res, next) {
 		try {
-			const userId = req.user._id;
-			const  circleId  = req.params.id;
+			const approverId = req.user._id;
+			const { circleId, withdrawalId } = validateApproveWithdrawal(req.body);
 
-			const circle = await grymeyCircleService.approveWithdrawal(circleId, userId);
+			const result = await grymeyCircleService.approveWithdrawal(
+				circleId,
+				withdrawalId,
+				approverId
+			);
 
 			res.json({
 				success: true,
-				message: 'User invited to circle successfully',
-				circle: {
-					_id: circle._id,
-					name: circle.name,
-					memberCount: circle?.members?.length,
-				},
+				message: result.message,
+				circle: result.circle,
+				withdrawal: result.withdrawal,
+				approved: result.approved,
 			});
 		} catch (error) {
-			logger.error(`Invite to circle error: ${error.message}`);
+			logger.error(`Withdrawal approval error: ${error.message}`);
+			next(error);
+		}
+	}
+	async rejectWithdrawal(req, res, next) {
+		try {
+			const approverId = req.user._id;
+			const { circleId, reason, withdrawalId } = validateRejectWithdrawal(
+				req.body
+			);
+
+			const result = await grymeyCircleService.rejectWithdrawal(
+				circleId,
+				withdrawalId,
+				approverId,
+				reason
+			);
+
+			res.json({
+				success: true,
+				message: 'Withdrawal rejected successfully',
+				circle: result.circle,
+				withdrawal: result.withdrawal,
+			});
+		} catch (error) {
+			logger.error(`Withdrawal rejection error: ${error.message}`);
 			next(error);
 		}
 	}
