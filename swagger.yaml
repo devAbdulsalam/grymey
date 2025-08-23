@@ -26,7 +26,7 @@ paths:
   /users/register:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Register user
       description: >-
         The API endpoint allows users to register or signup to create their
@@ -182,7 +182,7 @@ paths:
   /users/phone-login:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Login user with phone number
       description: >-
         The API endpoint allows users to log into their accounts.
@@ -340,7 +340,7 @@ paths:
   /users/login:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Login user
       description: >-
         The API endpoint allows users to log into their accounts.
@@ -501,7 +501,7 @@ paths:
   /users/current-user:
     get:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Get logged in user
       description: >-
         The API endpoint allows you to retrieve the details of the currently
@@ -634,7 +634,7 @@ paths:
   /users/logout:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Logout user
       description: >-
         The API endpoint is responsible for logging out users from the
@@ -716,7 +716,7 @@ paths:
   /users/refresh-token:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Refresh token
       description: >-
         The Refresh Access Token API is responsible for refreshing the access
@@ -817,7 +817,7 @@ paths:
   /users/assign-role/{userId}:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Assign role
       description: >-
         The API endpoint allows administrators to change the roles of users
@@ -908,7 +908,7 @@ paths:
   /users/resend-email-verification:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Resend email verification
       description: >-
         The API endpoint allows the logged-in user to request a resend of the
@@ -1071,7 +1071,7 @@ paths:
   /users/verify-email/{verificationToken}:
     get:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Verify user email
       description: >-
         The API endpoint is used to verify a user's email by accessing the
@@ -1157,7 +1157,7 @@ paths:
   /users/change-password:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Change current password
       description: >-
         The Change Password API allows logged-in users to update their current
@@ -1247,7 +1247,7 @@ paths:
   /users/forgot-password:
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Forgot password request
       description: >-
         The API endpoint allows you to send a forgot password email by providing
@@ -1334,7 +1334,7 @@ paths:
   /users/verify-token/{resetToken}:
     get:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: veriify  reset password token
       description: >-
         The API endpoint enables users to verify reset token
@@ -1397,7 +1397,7 @@ paths:
                     success: true
     post:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Reset forgotten password
       description: >-
         The API endpoint enables users to reset their password through the
@@ -1491,7 +1491,7 @@ paths:
   /users/avatar:
     patch:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Update avatar
       description: >-
         The API endpoint enables users to update their avatar or profile
@@ -1655,7 +1655,7 @@ paths:
   /users/profile:
     patch:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: Update user profile
       description: >-
         The API endpoint enables users to update their avatar or profile
@@ -1829,7 +1829,7 @@ paths:
   /users:
     get:
       tags:
-        - 🔐 Authentication
+        - 🔐 authentication
       summary: get all users
       description: >-
         The API endpoint allows to get general user.
@@ -5183,7 +5183,7 @@ paths:
   /services:
     get:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Get services balance
       description: >-
         The API endpoint retrieves user service balance.
@@ -5234,7 +5234,7 @@ paths:
   /services/cables:
     get:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Get cable services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -5285,7 +5285,7 @@ paths:
   /services/banks:
     get:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Get banks
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -5336,7 +5336,7 @@ paths:
   /services/networks:
     get:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Get net services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -5387,7 +5387,7 @@ paths:
   /services/verify-phone:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Verify Phone
       description: >-
         Verify phone
@@ -5450,7 +5450,7 @@ paths:
   /services/buy-airtime:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Buy data
       description: >-
         Buy data
@@ -5521,7 +5521,7 @@ paths:
   /services/buy-data:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Buy data
       description: >-
         Buy data
@@ -5592,7 +5592,7 @@ paths:
   /services/purchase-bill:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Purchase bill
       description: >-
         Purchase bill
@@ -5663,7 +5663,7 @@ paths:
   /services/verify-bvn:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Verify BVN
       description: >-
         Verify bvn
@@ -5738,7 +5738,7 @@ paths:
   /services/verify-nin:
     post:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Verify NIN
       description: >-
         Verify nin
@@ -5813,7 +5813,7 @@ paths:
   /services/bettings:
     get:
       tags:
-        - 🧘‍♀️ Services
+        - 🧘‍♀️ services
       summary: Get betting services
       description: >-
         The API endpoint retrieves a list of bill services.
@@ -6433,7 +6433,7 @@ paths:
   /client/balance:
     get:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Get user balance
       description: >-
         The API endpoint allows you to retrieve the balance of your account.
@@ -6519,7 +6519,7 @@ paths:
   /client/cards:
     post:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Add card
       description: >-
         The Add Card API allows logged-in users to add back card to their account.
@@ -6609,7 +6609,7 @@ paths:
                     success: true
     get:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Get card
       description: >-
         The API endpoint retrieves a list of card.
@@ -6716,7 +6716,7 @@ paths:
                     success: true
     delete:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Delete user cards
       description: >-
         The API endpoint allows you to delete cards.
@@ -6786,7 +6786,7 @@ paths:
   /client/cards/{cardId}:
     get:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Get user card by id
       description: >-
         The API endpoint allows you to retrieve user card by id.
@@ -6842,7 +6842,7 @@ paths:
           content:
     delete:
       tags:
-        - 📝 Client
+        - 📝 client
       summary: Delete user card by id
       description: >-
         The API endpoint allows you to delete card by id.
@@ -6936,12 +6936,12 @@ paths:
         schema:
           type: string
   tags:
-    - name: 🔐 Authentication
+    - name: 🔐 authentication
       description: >-
         This section encompasses all the APIs related to user authentication.
     - name: 🔄 General
       description: >-
         This section encompasses all other APIs.
-    - name: 🧘‍♀️ Services
+    - name: 🧘‍♀️ services
       description: >-
         This section encompasses all other APIs related to payment, airtime, data, etc.
